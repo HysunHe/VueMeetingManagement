@@ -2,11 +2,11 @@
 	<div> 
 		<div class="top-msg-region">
 			<el-row  style="font-size:20px;">
-				<el-col :span="12" style="margin-top: 45px;">
-					<span style="padding-left:52px;" >最近会议时间:  </span><span>2019/09/24 16:08:23 </span>
+				<el-col :span="12" style="margin:0; padding:0;">
+					<span style="padding-left:52px; display: inline-block; margin-top: 45px;">最近会议时间：</span><span>2019/09/24 16:08:23 </span>
 				</el-col>
-				<el-col :span="12" style="margin-top: 45px;">
-					<span>未加入会议议题: </span><span style="font-size:20px; color:#ffed27;">年末销售提升方案</span>
+				<el-col :span="12" style="margin:0; padding:0;">
+					<span style="display: inline-block; margin-top: 45px;">未加入会议议题：</span><span style="font-size:34px; color:#ffed27;">年末销售提升方案</span>
 				</el-col>				
 			</el-row>
 		</div>
