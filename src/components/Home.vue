@@ -34,13 +34,13 @@
       <el-aside width="182px" style="background-color: #205796;">
           <div class="menu-button">
             <span style="cursor:pointer;">
-              <img  style="padding-top:25px;" src="../assets/tasks.png">
+              <img  style="padding-top:22px;" src="../assets/tasks.png">
               <span style="display:block; font-size:18px; font-weight:bold;">我的任务</span>
             </span>
           </div>
           <div class="menu-button">
             <span style="cursor:pointer;">
-              <img  style="padding-top:25px;" src="../assets/sm.png">
+              <img  style="padding-top:22px;" src="../assets/sm.png">
               <span style="display:block; font-size:18px; font-weight:bold;">供应商管理</span>
             </span>
           </div>        

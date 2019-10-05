@@ -70,7 +70,6 @@
                             </el-table>
                         </div>
                         <div class="bottom clearfix">
-                            <time class="time">{{ currentDate }}</time>
                             <el-button type="text" class="button">操作按钮</el-button>
                         </div>
                     </el-card>
@@ -101,7 +100,6 @@
                             </el-table>
                         </div>
                         <div class="bottom clearfix">
-                            <time class="time">{{ currentDate }}</time>
                             <el-button type="text" class="button">操作按钮</el-button>
                         </div>
                     </el-card>
@@ -135,13 +133,7 @@
 		}
 	}
 </script>
-<style type="text/css"> 
-		.text {
-			font-size: 14px;
-		}
-		.item {
-			padding: 18px 0;
-		}
+<style scoped> 
 		.box-card {
 			width:438px;
 			height:314px;
@@ -167,7 +159,7 @@
 		.top-msg-region {
 			min-height:111px;
 			background: #505f67;
-			color:white;
+			color:#ffffff;
 		}
 		.grid-content {
 			border-radius: 4px;
