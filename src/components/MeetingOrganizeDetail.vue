@@ -3,22 +3,44 @@
         <el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
+             <el-breadcrumb-item :to="{ path: '/organize/detail' }">详情信息展示</el-breadcrumb-item>
         </el-breadcrumb>
 
         <el-divider></el-divider>
 
-        <div class="top-msg-region">
-                <span style="display: inline-block; ">会议编号：</span><span>2019/09/24 16:08:23 </span>
-                <span style="display: inline-block; margin-left: 100px;">会议名称：</span><span>年末销售提升方案</span>
-		</div>
-
         <div  class="clear clearfix" style="margin-top:74px;">
-             <el-button style="float:left;" type="text" class="button">＋ 添加</el-button>
-            <el-button style="float:left; margin-left:26px;"  type="text" class="button">＋ 结束</el-button>
-            <el-button style="float:right;" type="text" class="button">＋ 会议选择</el-button>
+             <el-button type="text" class="button">基本信息</el-button>
+            <el-button   type="text" class="button">会议材料</el-button>
         </div>
 
-        <el-row type="flex" style="margin-top:14px;">
+        <el-row type="flex"  style="margin-top:20px;">
+            <el-col :span="24">
+                <el-card class="box-card">
+                    <div class="menu-button">
+                        <span style="cursor:pointer;">
+                        <img  style="padding-top:25px;" src="../assets/mc.png">
+                        <span style="display:block; ">会议创建</span>
+                        </span>
+                    </div>
+                </el-card>
+                <el-card class="box-card" style="margin-left:86px;">
+                    <div class="menu-button">
+                        <span style="cursor:pointer;">
+                        <img  style="padding-top:25px;" src="../assets/mo.png">
+                        <span style="display:block; ">会议组织</span>
+                        </span>
+                    </div>
+                </el-card>
+                </el-card>
+            </el-col>					
+        </el-row>
+            
+        <el-row style="margin-top:26px;">
+            <el-col :span="24">
+                <span style="font-size:22px; color:#ffffff;">供应商推荐</span>
+            </el-col>
+        </el-row>
+        <el-row type="flex" >
             <el-col :span="24">
                 <el-card class="table-card">
                     <div>
@@ -84,8 +106,15 @@
         color:#ffffff;
         margin-top:38px;
     }
+
+    .box-card {
+        width:602px;
+        height:288px;
+        display: inline-table;
+    }
+
     .el-row {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         &:last-child {
         margin-bottom: 0;
         }
