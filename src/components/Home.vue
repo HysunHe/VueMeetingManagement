@@ -3,7 +3,7 @@
     <!-- header -->
     <div>
       <el-header height="85px" style="text-align:center;">
-        <span style="font-size:36px;">首页</span>
+        <span style="font-size:36px;">{{headerText}}</span>
         <div style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
            <img  src="../assets/logo.png">
           </div>
@@ -70,14 +70,16 @@
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
       defaultActiveIndex: ["0"],
       menuList: [],
       userName: "",
       collapsed: false,
       iscloseNav: false,
-      welcome: true
+      welcome: true,
+      bgUrl: "../assets/bg_home.png",
+      headerText: "首页"
     };
   },
   mounted2() {
