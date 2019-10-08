@@ -1,7 +1,7 @@
 <template>
     <div style="margin-left:52px; margin-right:52px;">
         <el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
         </el-breadcrumb>
 

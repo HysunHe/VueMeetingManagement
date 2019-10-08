@@ -17,24 +17,24 @@
                     <el-card class="box-card">
                         <div class="menu-button">
                             <span style="cursor:pointer;">
-                            <img  style="padding-top:25px;" src="../assets/mc.png">
-                            <span style="display:block; ">会议创建</span>
+                                <img  style="padding-top:25px;" src="../assets/mc.png">
+                                <span style="display:block; ">会议创建</span>
+                            </span>
+                        </div>
+                    </el-card>
+                    <el-card class="box-card" style="margin-left:86px;">
+                        <div class="menu-button">
+                            <span style="cursor:pointer;" @click="go_meeting_organize()">
+                                <img  style="padding-top:25px;" src="../assets/mo.png">
+                                <span style="display:block; ">会议组织</span>
                             </span>
                         </div>
                     </el-card>
                     <el-card class="box-card" style="margin-left:86px;">
                         <div class="menu-button">
                             <span style="cursor:pointer;">
-                            <img  style="padding-top:25px;" src="../assets/mo.png">
-                            <span style="display:block; ">会议组织</span>
-                            </span>
-                        </div>
-                    </el-card>
-                    <el-card class="box-card" style="margin-left:86px;">
-                        <div class="menu-button">
-                            <span style="cursor:pointer;">
-                            <img  style="padding-top:25px;" src="../assets/mq.png">
-                            <span style="display:block; ">会议查询</span>
+                                <img  style="padding-top:25px;" src="../assets/mq.png">
+                                <span style="display:block; ">会议查询</span>
                             </span>
                         </div>
                     </el-card>
@@ -109,6 +109,7 @@
 	</div>
 </template>
 <script type="text/javascript">
+    import bus from "../utils/bus.js";
 	export default{
 		data(){
 			 return {
@@ -130,7 +131,20 @@
                     address: '上海市普陀区金沙江路 1516 弄'
                 }]
             }
-		}
+        },
+        methods: {
+            go_meeting_organize(){
+                this.$emit('set_bg_class', 'bg_content');
+                 this.$router.push({
+                  path: "/organize"
+                });
+            }
+        },
+        mounted() {
+             if(this.$route.path === '/home') {
+                 this.$emit('set_bg_class', 'bg_home');
+             }
+        }
 	}
 </script>
 <style scoped> 

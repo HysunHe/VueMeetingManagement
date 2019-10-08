@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import  MyTask from '@/components/MyTask'
+import  MeetingHome from '@/components/MeetingHome'
 import  MeetingOrganize from '@/components/MeetingOrganize'
 import  MeetingOrganizeDetail from '@/components/MeetingOrganizeDetail'
 
@@ -39,7 +39,7 @@ export default new Router({
       path: '/',
       name: '首页',
       component: home,
-      redirect: '/organize/detail',
+      redirect: '/home',
       children: [
         // 404
         { path: '/map', component: map, name: '地图' },
@@ -60,7 +60,7 @@ export default new Router({
         // order
         { path: '/O_GetOrderList', component: O_GetOrderList, name: '订单列表' },
         
-        { path: '/mytask', component: MyTask, name: '我的任务' },
+        { path: '/home', component: MeetingHome, name: '我的任务' },
         { path: '/organize', component: MeetingOrganize, name: '会议组织' },
         { path: '/organize/detail', component: MeetingOrganizeDetail, name: '详情信息展示' }
       ]
