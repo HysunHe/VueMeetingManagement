@@ -51,7 +51,7 @@
                             <el-table
                                 :data="tableData"
                                 stripe
-                                header-cell-style="font-weight:bold; color:#333333;"
+                                :header-cell-style="headerCcell"
                                 style="width: 100%; font-size:18px; color:#333333;">
                                 <el-table-column
                                 prop="date"
@@ -81,7 +81,7 @@
                             <el-table
                                 :data="tableData"
                                 stripe
-                                header-cell-style="font-weight:bold; color:#333333;"
+                                :header-cell-style="headerCcell"
                                 style="width: 100%; font-size:18px; color:#333333;">
                                 <el-table-column
                                 prop="date"
@@ -134,16 +134,27 @@
         },
         methods: {
             go_meeting_organize(){
+                this.$emit('set_header_text', '会议组织');
                 this.$emit('set_bg_class', 'bg_content');
                  this.$router.push({
                   path: "/organize"
                 });
+            },
+            headerCcell(row){ 
+                return "font-weight:bold; color:#333333; ";
             }
         },
         mounted() {
-             if(this.$route.path === '/home') {
-                 this.$emit('set_bg_class', 'bg_home');
-             }
+            if(this.$route.path === '/home') {
+                this.$emit('set_header_text', '首页');
+                this.$emit('set_bg_class', 'bg_home');
+            } else if(this.$route.path === '/organize') {
+                this.$emit('set_header_text', '会议组织');
+                this.$emit('set_bg_class', 'bg_content');
+            } else if(this.$route.path === '/organize/detail') {
+                this.$emit('set_header_text', '详情信息展示');
+                this.$emit('set_bg_class', 'bg_content');
+            }
         }
 	}
 </script>

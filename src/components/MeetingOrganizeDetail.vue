@@ -8,12 +8,12 @@
 
         <el-divider></el-divider>
 
-        <div  class="clear clearfix" style="margin-top:74px;">
-             <el-button type="text" class="button">基本信息</el-button>
-            <el-button   type="text" class="button">会议材料</el-button>
+        <div  class="clear clearfix" style="margin-top:20px;">
+             <el-button type="text" class="button button-active">基本信息</el-button>
+            <el-button   type="text" style="margin-left:-4px;" class="button button-inactive">会议材料</el-button>
         </div>
 
-        <el-row type="flex"  style="margin-top:20px;">
+        <el-row type="flex"  style="margin-top:30px;">
             <el-col :span="24">
                 <el-card class="box-card">
                     <div class="menu-button">
@@ -23,7 +23,7 @@
                         </span>
                     </div>
                 </el-card>
-                <el-card class="box-card" style="margin-left:86px;">
+                <el-card class="box-card" style="margin-left:48px;">
                     <div class="menu-button">
                         <span style="cursor:pointer;">
                         <img  style="padding-top:25px;" src="../assets/mo.png">
@@ -35,37 +35,35 @@
             </el-col>					
         </el-row>
             
-        <el-row style="margin-top:26px;">
+        <el-row style="margin-top:35px;">
             <el-col :span="24">
                 <span style="font-size:22px; color:#ffffff;">供应商推荐</span>
             </el-col>
         </el-row>
         <el-row type="flex" >
             <el-col :span="24">
-                <el-card class="table-card">
-                    <div>
-                        <el-table
-                            :data="tableData"
-                            stripe
-                            header-cell-style="font-weight:bold; color:#333333;"
-                            style="width: 100%; font-size:18px; color:#333333;">
-                            <el-table-column
-                            prop="date"
-                            label="日期"
-                            width="180">
-                            </el-table-column>
-                            <el-table-column
-                            prop="name"
-                            label="姓名"
-                            width="180">
-                            </el-table-column>
-                            <el-table-column
-                            prop="address"
-                            label="地址">
-                            </el-table-column>
-                        </el-table>
-                    </div>
-                </el-card>
+                <div id="supplierRecommendTable">
+                    <el-table
+                        :data="tableData"
+                        stripe
+                        :header-cell-style="headerCcell"
+                        style="width: 100%; font-size:18px; color:#333333;">
+                        <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                        </el-table-column>
+                        <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                        </el-table-column>
+                        <el-table-column
+                        prop="address"
+                        label="地址">
+                        </el-table-column>
+                    </el-table>
+                </div>
             </el-col>			
         </el-row>
 
@@ -97,7 +95,16 @@
                     address: '上海市普陀区金沙江路 1516 弄'
                 }]
             }
-		}
+        },
+        methods: {
+            headerCcell(row){ 
+                return "font-weight:bold; color:#333333; background-color: #accef8;";
+            }
+        },
+        mounted() {
+            this.$emit('set_header_text', '详情信息展示');
+            this.$emit('set_bg_class', 'bg_content');
+        }
 	}
 </script>
 <style scoped> 
@@ -106,33 +113,44 @@
         color:#ffffff;
         margin-top:38px;
     }
-
     .box-card {
         width:602px;
         height:288px;
         display: inline-table;
     }
-
     .el-row {
         margin-bottom: 20px;
         &:last-child {
         margin-bottom: 0;
         }
     }
+    
     .el-col {
         border-radius: 4px;
     }
+
     .bottom {
         margin-top: 20px;
     }
+
     .button {
         padding: 0;
-        background: #ffffff;
-        width:130px;
-        height:62px;
+        margin:0;
+        background: transparent;
+        width:122px;
+        height:50px;
         font-size:20px;
-        color: #0c7df0;
+        color: #ffffff;
     }
+
+    .button-active {
+        background-color: #4fbafd;
+    }
+
+    .button-inactive {
+        border: 1px solid;
+    }
+
     .clearfix:before,
     .clearfix:after {
         display: table;
@@ -140,11 +158,5 @@
     }
     .clearfix:after {
         clear: both
-    }
-    .crumb {
-        height: 36px;
-        line-height: 36px;
-        font-size:16px;
-        color:#ffffff;
     }
 </style>

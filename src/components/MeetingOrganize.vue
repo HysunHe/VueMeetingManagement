@@ -13,39 +13,33 @@
 		</div>
 
         <div  class="clear clearfix" style="margin-top:74px;">
-             <el-button style="float:left;" type="text" class="button">＋ 添加</el-button>
-            <el-button style="float:left; margin-left:26px;"  type="text" class="button">＋ 结束</el-button>
-            <el-button style="float:right;" type="text" class="button">＋ 会议选择</el-button>
+             <el-button style="float:left;" type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 添加</el-button>
+            <el-button style="float:left; margin-left:26px;"  type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 结束</el-button>
+            <el-button style="float:right;" type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 会议选择</el-button>
         </div>
 
-        <el-row type="flex" style="margin-top:14px;">
-            <el-col :span="24">
-                <el-card class="table-card">
-                    <div>
-                        <el-table
-                            :data="tableData"
-                            stripe
-                            header-cell-style="font-weight:bold; color:#333333;"
-                            style="width: 100%; font-size:18px; color:#333333;">
-                            <el-table-column
-                            prop="date"
-                            label="日期"
-                            width="180">
-                            </el-table-column>
-                            <el-table-column
-                            prop="name"
-                            label="姓名"
-                            width="180">
-                            </el-table-column>
-                            <el-table-column
-                            prop="address"
-                            label="地址">
-                            </el-table-column>
-                        </el-table>
-                    </div>
-                </el-card>
-            </el-col>			
-        </el-row>
+        <div style="margin-top:14px;">
+            <el-table
+                :data="tableData"
+                stripe
+                :header-cell-style="headerCcell"
+                style="width: 100%; font-size:18px; color:#333333;">
+                <el-table-column
+                prop="date"
+                label="日期"
+                width="180">
+                </el-table-column>
+                <el-table-column
+                prop="name"
+                label="姓名"
+                width="180">
+                </el-table-column>
+                <el-table-column
+                prop="address"
+                label="地址">
+                </el-table-column>
+            </el-table>
+        </div>
 
         <div style="float:right;">
             <el-pagination layout="prev, next, total"  :page-size="10" :total="15">
@@ -75,7 +69,16 @@
                     address: '上海市普陀区金沙江路 1516 弄'
                 }]
             }
-		}
+        },
+        mounted() {
+            this.$emit('set_header_text', '会议组织');
+            this.$emit('set_bg_class', 'bg_content');
+        },
+        methods: {
+            headerCcell(row){ 
+                return "font-weight:bold; color:#333333; background-color: #c6d0dd;";
+            }
+        }
 	}
 </script>
 <style scoped> 
@@ -111,11 +114,5 @@
     }
     .clearfix:after {
         clear: both
-    }
-    .crumb {
-        height: 36px;
-        line-height: 36px;
-        font-size:16px;
-        color:#ffffff;
     }
 </style>

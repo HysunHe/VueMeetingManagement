@@ -61,7 +61,7 @@
       <!-- 右侧路由信息 -->
       <el-container style="min-width:1605px;">
         <el-main style="padding:0;">
-          <router-view @set_bg_class="set_bg_class"></router-view>
+          <router-view @set_bg_class="set_bg_class" @set_header_text="set_header"></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -158,6 +158,10 @@
       set_bg_class(className) {
         console.log("[Home]set bg_class to " + className);
         this.bg_class = className;
+      },
+      set_header(headerText) {
+        console.log("[Home]set headerText to " + headerText);
+        this.headerText = headerText;
       },
       // 	index: 选中菜单项的 index, indexPath: 选中菜单项的 index path
       handleSelect(index) {
