@@ -54,18 +54,19 @@
                                 :header-cell-style="headerCcell"
                                 style="width: 100%; font-size:18px; color:#333333;">
                                 <el-table-column
-                                prop="meetingName"
-                                label="方案名称"
-                                width="180">
+                                    prop="meetingName"
+                                    label="方案名称">
                                 </el-table-column>
                                 <el-table-column
-                                prop="owner"
-                                label="申请人"
-                                width="180">
+                                    prop="owner.name"
+                                    label="申请人"
+                                    width="180">
                                 </el-table-column>
                                 <el-table-column
-                                prop="meetingTime"
-                                label="申请时间">
+                                    prop="meetingTime"
+                                    label="申请时间"
+                                    :formatter="truncDatetime2Mins"
+                                    width="180">
                                 </el-table-column>
                             </el-table>
                         </div>
@@ -75,33 +76,39 @@
                     </el-card>
                    <el-card class="table-card" style="margin-left:22px;">
                         <div slot="header" class="clearfix">
-                            <span style="font-size:24px; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">30</span>会议申请等待安排）</span>
+                            <span style="font-size:24px; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">{{totalTopics}}</span>会议申请等待安排）</span>
                         </div>
                         <div>
                             <el-table
-                                :data="tableData"
+                                :data="topicList"
                                 stripe
                                 :header-cell-style="headerCcell"
                                 style="width: 100%; font-size:18px; color:#333333;">
                                 <el-table-column
-                                prop="date"
-                                label="会议议题"
-                                width="180">
+                                    prop="topicName"
+                                    label="会议议题">
                                 </el-table-column>
                                 <el-table-column
-                                prop="name"
-                                label="日期"
-                                width="180">
+                                    prop="applyTime"
+                                    label="日期"
+                                    :formatter="truncDate"
+                                    width="180">
                                 </el-table-column>
                                 <el-table-column
-                                prop="address"
-                                label="时间">
+                                    prop="applyTime"
+                                    label="时间"
+                                    :formatter="truncTime"
+                                    width="90">
                                 </el-table-column>
                                 <el-table-column
-                                prop="address"
-                                label="时长">
+                                    prop="topicMaxDuration"
+                                    label="时长"
+                                    width="90">
                                 </el-table-column>
                             </el-table>
+                        </div>
+                        <div class="bottom clearfix">
+                            <el-button type="text" class="button" @click="showAllTopicList()">查看申请列表</el-button>
                         </div>
                     </el-card>
                 </el-col>			
@@ -116,24 +123,10 @@
 			 return {
                 meetingList: [],
                 meetingListOrig: [],
+                topicList: [],
+                topicListOrig: [],
                 totalMeetings: 0,
-                tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }]
+                totalTopics: 0
             }
         },
         methods: {
@@ -153,6 +146,25 @@
                 } else {
                     this.meetingList = this.meetingListOrig;
                 }
+            },
+            showAllTopicList(){
+                if(this.topicList === this.topicListOrig && this.topicListOrig.length > 5) {
+                    this.topicList = this.topicListOrig.slice(0,5);
+                } else {
+                    this.topicList = this.topicListOrig;
+                }
+            },
+            truncDate(row, column, cellValue, index){
+                const daterc = row[column.property]
+                return daterc.substring(0, daterc.indexOf(' '));
+            },
+            truncTime(row, column, cellValue, index){
+                const daterc = row[column.property]
+                return daterc.substring(daterc.indexOf(' '), daterc.lastIndexOf(':'));
+            },
+            truncDatetime2Mins(row, column, cellValue, index){
+                const daterc = row[column.property]
+                return daterc.substring(0, daterc.lastIndexOf(':'));
             }
         },
         mounted() {
@@ -170,7 +182,7 @@
                 }
              })(this);
 
-            // Initialize table data
+            // Initialize meeting table data 
             (function(_this){
                 _this.$http.get(_this.baseurl + '/listMeetingsByPage/1000/１').then(function (response) {
                     _this.meetingListOrig = response.data.list;
@@ -180,6 +192,19 @@
                         _this.meetingList = _this.meetingListOrig;
                     }
                     _this.totalMeetings = _this.meetingListOrig.length;
+                });
+            })(this);
+
+            // Initialize topics table data
+            (function(_this){
+                _this.$http.get(_this.baseurl + '/listTopicsByPage/1000/１').then(function (response) {
+                    _this.topicListOrig = response.data.list;
+                    if(_this.topicListOrig.length > 5) {
+                        _this.topicList = _this.topicListOrig.slice(0,5);
+                    } else {
+                        _this.topicList = _this.topicListOrig;
+                    }
+                    _this.totalTopics = _this.topicListOrig.length;
                 });
             })(this);
         }
