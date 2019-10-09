@@ -17,7 +17,7 @@
             <el-button style="float:left; margin-left:26px;"  type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 结束</el-button>
             <el-button  style="float:right;" type="text" class="button" @click="selectMeeting"><img  class="button_img_size" src="../assets/add.png"> 会议选择</el-button>
             <el-select  id="sel_meeting" ref="sel_meeting" style="float:right; " v-if="showMeetingSelBox" v-model="selectedMeeting" value-key="meetingId"  
-                                 @change="onMeetingSelect" default-first-option placeholder="请选择">
+                                 @change="onMeetingSelect" filterable placeholder="请选择">
                 <el-option
                     v-for="item in meetings"
                     :key="item.meetingId"
@@ -29,29 +29,47 @@
 
         <div style="margin-top:14px;">
             <el-table
-                :data="tableData"
+                :data="meetingTopics"
                 stripe
                 :header-cell-style="headerCcell"
                 style="width: 100%; font-size:18px; color:#333333;">
                 <el-table-column
-                prop="date"
-                label="日期"
-                width="180">
+                    type="index"
+                    label="序号"
+                    width="100">
                 </el-table-column>
                 <el-table-column
-                prop="name"
-                label="姓名"
-                width="180">
+                    prop="topic.topicName"
+                    label="议题名称">
                 </el-table-column>
                 <el-table-column
-                prop="address"
-                label="地址">
+                    prop="topic.topicApplier.name"
+                    label="申请人"
+                    width="200">
+                </el-table-column>
+                <el-table-column
+                    prop="topicMaxDuration"
+                    label="申请类型"
+                    width="200">
+                </el-table-column>
+                <el-table-column
+                    prop="conclusion"
+                    label="状态"
+                    width="180">
+                </el-table-column>
+                <el-table-column
+                    fixed="right"
+                    label="操作"
+                    width="180">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="text" size="small">更改</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
         </div>
 
         <div style="float:right;">
-            <el-pagination layout="prev, next, total"  :page-size="10" :total="15">
+            <el-pagination layout="prev, next, total"  :page-size="15" :total="totalTopics">
             </el-pagination>
         </div>
     </div>
@@ -61,37 +79,28 @@
 	export default{
 		data(){
 			 return {
-                tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }],
                 meetings: [],
                 selectedMeeting: {},
+                meetingTopics: [],
+                totalTopics: 0,
                 showMeetingSelBox: false
             }
+        },
+        created() {
+            (function(_this){
+                console.log("Loading topics");
+                _this.meetings = bus.meeting_list;
+                if(bus.meeting_list && bus.meeting_list.length > 0) {
+                    _this.selectedMeeting = bus.meeting_list[0];
+                    _this.loadTopics(_this);
+                } else {
+                    console.warn("Meeting list is not populated yet!");
+                }
+            })(this);
         },
         mounted() {
             this.$emit('set_header_text', '会议组织');
             this.$emit('set_bg_class', 'bg_content');
-            this.meetings = bus.meeting_list;
-            if(bus.meeting_list && bus.meeting_list.length > 0) {
-                this.selectedMeeting = bus.meeting_list[0];
-            } else {
-                console.warn("Meeting list is not populated yet!");
-            }
         },
         methods: {
             headerCcell(row){ 
@@ -104,9 +113,28 @@
                     _this.$refs.sel_meeting.focus();
                 }, 100)
             },
+            loadTopics(_this) {
+                _this.$http.get(_this.baseurl + '/getMeetingTopics/' + _this.selectedMeeting.meetingId).then(function (response) {
+                    _this.meetingTopics = response.data;
+                    _this.totalTopics = _this.meetingTopics.length;
+                });
+            },
             onMeetingSelect() {
                 this.$refs.sel_meeting.blur();
                 this.showMeetingSelBox = false;
+                this.loadTopics(this);
+            },
+            handleClick(row) {
+                console.log(row);
+                this.$alert('正在操作主题：' + row.topic.topicName, '操作', {
+                    confirmButtonText: '确定',
+                    callback: action => {
+                        this.$message({
+                            type: 'info',
+                            message: `action: ${ action }`
+                        });
+                    }
+                });
             }
         }
 	}
