@@ -45,32 +45,32 @@
                 <el-col :span="24">
                     <el-card class="table-card" style="margin-right:22px;">
                         <div slot="header" class="clearfix">
-                            <span style="font-size:24px; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">30</span>会议申请等待安排）</span>
+                            <span style="font-size:24px; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">{{totalMeetings}}</span>会议申请等待安排）</span>
                         </div>
                         <div>
                             <el-table
-                                :data="tableData"
+                                :data="meetingList"
                                 stripe
                                 :header-cell-style="headerCcell"
                                 style="width: 100%; font-size:18px; color:#333333;">
                                 <el-table-column
-                                prop="date"
-                                label="日期"
+                                prop="meetingName"
+                                label="方案名称"
                                 width="180">
                                 </el-table-column>
                                 <el-table-column
-                                prop="name"
-                                label="姓名"
+                                prop="owner"
+                                label="申请人"
                                 width="180">
                                 </el-table-column>
                                 <el-table-column
-                                prop="address"
-                                label="地址">
+                                prop="meetingTime"
+                                label="申请时间">
                                 </el-table-column>
                             </el-table>
                         </div>
                         <div class="bottom clearfix">
-                            <el-button type="text" class="button">操作按钮</el-button>
+                            <el-button type="text" class="button" @click="showAllMeetingList()">查看申请列表</el-button>
                         </div>
                     </el-card>
                    <el-card class="table-card" style="margin-left:22px;">
@@ -85,22 +85,23 @@
                                 style="width: 100%; font-size:18px; color:#333333;">
                                 <el-table-column
                                 prop="date"
-                                label="日期"
+                                label="会议议题"
                                 width="180">
                                 </el-table-column>
                                 <el-table-column
                                 prop="name"
-                                label="姓名"
+                                label="日期"
                                 width="180">
                                 </el-table-column>
                                 <el-table-column
                                 prop="address"
-                                label="地址">
+                                label="时间">
+                                </el-table-column>
+                                <el-table-column
+                                prop="address"
+                                label="时长">
                                 </el-table-column>
                             </el-table>
-                        </div>
-                        <div class="bottom clearfix">
-                            <el-button type="text" class="button">操作按钮</el-button>
                         </div>
                     </el-card>
                 </el-col>			
@@ -113,6 +114,9 @@
 	export default{
 		data(){
 			 return {
+                meetingList: [],
+                meetingListOrig: [],
+                totalMeetings: 0,
                 tableData: [{
                     date: '2016-05-02',
                     name: '王小虎',
@@ -142,19 +146,42 @@
             },
             headerCcell(row){ 
                 return "font-weight:bold; color:#333333; ";
+            },
+            showAllMeetingList(){
+                if(this.meetingList === this.meetingListOrig && this.meetingListOrig.length > 5) {
+                    this.meetingList = this.meetingListOrig.slice(0,5);
+                } else {
+                    this.meetingList = this.meetingListOrig;
+                }
             }
         },
         mounted() {
-            if(this.$route.path === '/home') {
-                this.$emit('set_header_text', '首页');
-                this.$emit('set_bg_class', 'bg_home');
-            } else if(this.$route.path === '/organize') {
-                this.$emit('set_header_text', '会议组织');
-                this.$emit('set_bg_class', 'bg_content');
-            } else if(this.$route.path === '/organize/detail') {
-                this.$emit('set_header_text', '详情信息展示');
-                this.$emit('set_bg_class', 'bg_content');
-            }
+            // Dynamic header text & background image.
+            (function(_this){
+                if(_this.$route.path === '/home') {
+                    _this.$emit('set_header_text', '首页');
+                    _this.$emit('set_bg_class', 'bg_home');
+                } else if(_this.$route.path === '/organize') {
+                    _this.$emit('set_header_text', '会议组织');
+                    _this.$emit('set_bg_class', 'bg_content');
+                } else if(_this.$route.path === '/organize/detail') {
+                    _this.$emit('set_header_text', '详情信息展示');
+                    _this.$emit('set_bg_class', 'bg_content');
+                }
+             })(this);
+
+            // Initialize table data
+            (function(_this){
+                _this.$http.get(_this.baseurl + '/listMeetingsByPage/1000/１').then(function (response) {
+                    _this.meetingListOrig = response.data.list;
+                    if(_this.meetingListOrig.length > 5) {
+                        _this.meetingList = _this.meetingListOrig.slice(0,5);
+                    } else {
+                        _this.meetingList = _this.meetingListOrig;
+                    }
+                    _this.totalMeetings = _this.meetingListOrig.length;
+                });
+            })(this);
         }
 	}
 </script>
@@ -165,12 +192,16 @@
             display: inline-table;
 		}
 		.table-card {
-			width:723px;
+            width:723px;
+            height:476px;
+  /*          
 			max-height:476px;
-            min-height: 400px;
+            min-height: 476px;
+*/
             display: inline-table;
             border: 1px solid;
             border-color: #4f718a;
+            overflow: scroll;
 		}
 		.el-row {
 			margin-bottom: 30px;

@@ -135,18 +135,6 @@
               });
             }.bind(this)
           );
-      // } else {
-      //   this.$message({
-      //     showClose: true,
-      //     type: "warning",
-      //     message: "请先登陆"
-      //   });
-      //   setTimeout(() => {
-      //     tt.$router.push({
-      //       path: "/login"
-      //     });
-      //   }, 1500);
-      // }
     },
     mounted() {
       // bus.$on("set_bg_class", function(e) {

@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "6baf5917-bcb9-4358-8180-557d2fa0b977",
+		"name": "FAW",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addMeetingTopics",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/addMeetingTopics/1/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"addMeetingTopics",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMeetingTopics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/getMeetingTopics/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"getMeetingTopics",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listTopicsByPage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/listTopicsByPage/5/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"listTopicsByPage",
+						"5",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listMeetingsByPage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/listMeetingsByPage/5/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"listMeetingsByPage",
+						"5",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMeetingById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/getMeetingById/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"getMeetingById",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDiscussionStuf",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/getDiscussionStuf/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"getDiscussionStuf",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

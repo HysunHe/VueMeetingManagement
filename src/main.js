@@ -12,6 +12,7 @@ import axios from 'axios'
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$http = axios;
+Vue.prototype.baseurl = 'https://o100.odainfra.com/faw_backend';
 
 /* eslint-disable no-new */
 new Vue({
