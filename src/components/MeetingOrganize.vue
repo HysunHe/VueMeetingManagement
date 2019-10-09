@@ -27,7 +27,7 @@
             </el-select>
         </div>
 
-        <div style="margin-top:14px;">
+        <div id="topicsTable" style="margin-top:14px;">
             <el-table
                 :data="meetingTopics"
                 stripe
@@ -36,11 +36,14 @@
                 <el-table-column
                     type="index"
                     label="序号"
+                    align="center"
                     width="100">
                 </el-table-column>
                 <el-table-column
-                    prop="topic.topicName"
                     label="议题名称">
+                        <template slot-scope="scope">
+                            <a style="color:#0c7df0;" href="javascript:void(0);" @click="checkTopicDetail(scope.row)">{{scope.row.topic.topicName}}</a>
+                        </template>
                 </el-table-column>
                 <el-table-column
                     prop="topic.topicApplier.name"
@@ -60,6 +63,7 @@
                 <el-table-column
                     fixed="right"
                     label="操作"
+                    align="center"
                     width="180">
                     <template slot-scope="scope">
                         <el-button @click="handleClick(scope.row)" type="text" size="small">更改</el-button>
@@ -91,7 +95,7 @@
                 console.log("Loading topics");
                 _this.meetings = bus.meeting_list;
                 if(bus.meeting_list && bus.meeting_list.length > 0) {
-                    _this.selectedMeeting = bus.meeting_list[0];
+                    _this.selectedMeeting = bus.meeting_list[bus.meeting_list.length - 1];
                     _this.loadTopics(_this);
                 } else {
                     console.warn("Meeting list is not populated yet!");
@@ -135,6 +139,11 @@
                         });
                     }
                 });
+            },
+            checkTopicDetail(row) {
+                this.$router.push({
+                  path: "/organize/detail"
+                });
             }
         }
 	}
@@ -177,5 +186,9 @@
 <style>
     #sel_meeting{
         height:62px;
+    }
+    #topicsTable .el-table td, #topicsTable .el-table th.is-leaf {
+        border-right: 1px solid #636363;
+        border-bottom: 1px solid #636363;
     }
 </style>

@@ -16,19 +16,23 @@
         <el-row type="flex"  style="margin-top:30px;">
             <el-col :span="24">
                 <el-card class="box-card">
-                    <div class="menu-button">
-                        <span style="cursor:pointer;">
-                        <img  style="padding-top:25px;" src="../assets/mc.png">
-                        <span style="display:block; ">会议创建</span>
-                        </span>
+                    <div>
+                        <span style="display:block; font-size:24px; color:#80c2fc;">项目背景</span>
+                        <span style="display:block; margin-top: 10px; font-size:18px; color:#333333; font-weight:bold;">申请单号：100***766</span>
+                        <span style="display:block; margin-top: 10px; font-size:18px; color:#333333; font-weight:bold;">最高投票限价：120万</span>
+                        <span style="display:block; margin-top: 10px; font-size:18px; color:#333333; font-weight:bold;">项目预算：100万（含税）</span>
+                        <span style="display:block; margin-top: 10px; font-size:18px; color:#333333;">项目工期：2年</span>
+                        <span style="display:block; margin-top: 10px; font-size:18px; color:#333333;">项目保持期：30年</span>
+                        <span style="display:block; margin-top: 10px; font-size:18px; color:#333333;">项目内容：自动驾使行人主动识别工程</span>
                     </div>
                 </el-card>
                 <el-card class="box-card" style="margin-left:48px;">
-                    <div class="menu-button">
-                        <span style="cursor:pointer;">
-                        <img  style="padding-top:25px;" src="../assets/mo.png">
-                        <span style="display:block; ">会议组织</span>
-                        </span>
+                    <div>
+                        <span style="display:block; font-size:24px; color:#80c2fc;">采购方案</span>
+                        <span style="display:block; margin-top: 15px; font-size:18px; color:#333333; font-weight:bold;">采购方式：直接采购</span>
+                        <span style="display:block; margin-top: 15px; font-size:18px; color:#333333; font-weight:bold;">评估方法：经评审的最低投标价法</span>
+                        <span style="display:block; margin-top: 15px; font-size:18px; color:#333333;">推荐供应商：XXX 公司，YYY 公司</span>
+                        <span style="display:block; margin-top: 15px; font-size:18px; color:#333333;">付款方式及式：<span style="color:#333333">预付款三分之一，产品交付后再付款三分之一，剩余维护费用</span></span>
                     </div>
                 </el-card>
                 </el-card>
@@ -124,15 +128,12 @@
         margin-bottom: 0;
         }
     }
-    
     .el-col {
         border-radius: 4px;
     }
-
     .bottom {
         margin-top: 20px;
     }
-
     .button {
         padding: 0;
         margin:0;
@@ -142,15 +143,12 @@
         font-size:20px;
         color: #ffffff;
     }
-
     .button-active {
         background-color: #4fbafd;
     }
-
     .button-inactive {
         border: 1px solid;
     }
-
     .clearfix:before,
     .clearfix:after {
         display: table;
@@ -158,5 +156,11 @@
     }
     .clearfix:after {
         clear: both
+    }
+</style>
+<style>
+    #supplierRecommendTable .el-table td, #supplierRecommendTable .el-table th.is-leaf {
+        border-right: 1px solid #7d7d7d;
+        border-bottom: 1px solid #7d7d7d;
     }
 </style>

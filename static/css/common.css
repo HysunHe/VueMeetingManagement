@@ -214,14 +214,3 @@ body {
 .el-button {
   border-radius: 0;
 }
-
-#supplierRecommendTable .el-table td, #supplierRecommendTable .el-table th.is-leaf {
-  border-right: 1px solid #7d7d7d;
-  border-bottom: 1px solid #7d7d7d;
-}
-
-/*
-.el-table .cell {
-  line-height: 30px;
-}
-*/

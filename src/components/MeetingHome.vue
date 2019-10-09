@@ -131,7 +131,7 @@
             go_meeting_organize(){
                 this.$emit('set_header_text', '会议组织');
                 this.$emit('set_bg_class', 'bg_content');
-                 this.$router.push({
+                this.$router.push({
                   path: "/organize"
                 });
             },
