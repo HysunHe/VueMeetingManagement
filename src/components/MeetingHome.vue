@@ -122,9 +122,7 @@
 		data(){
 			 return {
                 meetingList: [],
-                meetingListOrig: [],
                 topicList: [],
-                topicListOrig: [],
                 totalMeetings: 0,
                 totalTopics: 0
             }
@@ -141,17 +139,17 @@
                 return "font-weight:bold; color:#333333; ";
             },
             showAllMeetingList(){
-                if(this.meetingList === this.meetingListOrig && this.meetingListOrig.length > 5) {
-                    this.meetingList = this.meetingListOrig.slice(0,5);
+                if(this.meetingList === bus.meeting_list && bus.meeting_list.length > 5) {
+                    this.meetingList = bus.meeting_list.slice(0,5);
                 } else {
-                    this.meetingList = this.meetingListOrig;
+                    this.meetingList = bus.meeting_list;
                 }
             },
             showAllTopicList(){
-                if(this.topicList === this.topicListOrig && this.topicListOrig.length > 5) {
-                    this.topicList = this.topicListOrig.slice(0,5);
+                if(this.topicList === bus.topic_list && bus.topic_list.length > 5) {
+                    this.topicList = bus.topic_list.slice(0,5);
                 } else {
-                    this.topicList = this.topicListOrig;
+                    this.topicList = bus.topic_list;
                 }
             },
             truncDate(row, column, cellValue, index){
@@ -185,26 +183,26 @@
             // Initialize meeting table data 
             (function(_this){
                 _this.$http.get(_this.baseurl + '/listMeetingsByPage/1000/１').then(function (response) {
-                    _this.meetingListOrig = response.data.list;
-                    if(_this.meetingListOrig.length > 5) {
-                        _this.meetingList = _this.meetingListOrig.slice(0,5);
+                    bus.meeting_list = response.data.list;
+                    if(bus.meeting_list.length > 5) {
+                        _this.meetingList = bus.meeting_list.slice(0,5);
                     } else {
-                        _this.meetingList = _this.meetingListOrig;
+                        _this.meetingList = bus.meeting_list;
                     }
-                    _this.totalMeetings = _this.meetingListOrig.length;
+                    _this.totalMeetings = bus.meeting_list.length;
                 });
             })(this);
 
             // Initialize topics table data
             (function(_this){
                 _this.$http.get(_this.baseurl + '/listTopicsByPage/1000/１').then(function (response) {
-                    _this.topicListOrig = response.data.list;
-                    if(_this.topicListOrig.length > 5) {
-                        _this.topicList = _this.topicListOrig.slice(0,5);
+                    bus.topic_list = response.data.list;
+                    if(bus.topic_list.length > 5) {
+                        _this.topicList = bus.topic_list.slice(0,5);
                     } else {
-                        _this.topicList = _this.topicListOrig;
+                        _this.topicList = bus.topic_list;
                     }
-                    _this.totalTopics = _this.topicListOrig.length;
+                    _this.totalTopics = bus.topic_list.length;
                 });
             })(this);
         }

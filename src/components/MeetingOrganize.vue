@@ -8,14 +8,23 @@
         <el-divider></el-divider>
 
         <div class="top-msg-region">
-                <span style="display: inline-block; ">会议编号：</span><span>2019/09/24 16:08:23 </span>
-                <span style="display: inline-block; margin-left: 100px;">会议名称：</span><span>年末销售提升方案</span>
+                <span style="display: inline-block; ">会议编号：</span><span>S00000000000-{{selectedMeeting.meetingId}}</span>
+                <span style="display: inline-block; margin-left: 100px;">会议名称：</span><span>{{selectedMeeting.meetingName}}</span>
 		</div>
 
         <div  class="clear clearfix" style="margin-top:74px;">
              <el-button style="float:left;" type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 添加</el-button>
             <el-button style="float:left; margin-left:26px;"  type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 结束</el-button>
-            <el-button style="float:right;" type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 会议选择</el-button>
+            <el-button  style="float:right;" type="text" class="button" @click="selectMeeting"><img  class="button_img_size" src="../assets/add.png"> 会议选择</el-button>
+            <el-select  id="sel_meeting" ref="sel_meeting" style="float:right; " v-if="showMeetingSelBox" v-model="selectedMeeting" value-key="meetingId"  
+                                 @change="onMeetingSelect" default-first-option placeholder="请选择">
+                <el-option
+                    v-for="item in meetings"
+                    :key="item.meetingId"
+                    :label="item.meetingName"
+                    :value="item">
+                </el-option>
+            </el-select>
         </div>
 
         <div style="margin-top:14px;">
@@ -48,6 +57,7 @@
     </div>
 </template>
 <script type="text/javascript">
+    import bus from "../utils/bus.js";
 	export default{
 		data(){
 			 return {
@@ -67,16 +77,36 @@
                     date: '2016-05-03',
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1516 弄'
-                }]
+                }],
+                meetings: [],
+                selectedMeeting: {},
+                showMeetingSelBox: false
             }
         },
         mounted() {
             this.$emit('set_header_text', '会议组织');
             this.$emit('set_bg_class', 'bg_content');
+            this.meetings = bus.meeting_list;
+            if(bus.meeting_list && bus.meeting_list.length > 0) {
+                this.selectedMeeting = bus.meeting_list[0];
+            } else {
+                console.warn("Meeting list is not populated yet!");
+            }
         },
         methods: {
             headerCcell(row){ 
                 return "font-weight:bold; color:#333333; background-color: #c6d0dd;";
+            },
+            selectMeeting() {
+                this.showMeetingSelBox = true;
+                let _this = this;
+                setTimeout(() => {
+                    _this.$refs.sel_meeting.focus();
+                }, 100)
+            },
+            onMeetingSelect() {
+                this.$refs.sel_meeting.blur();
+                this.showMeetingSelBox = false;
             }
         }
 	}
@@ -114,5 +144,10 @@
     }
     .clearfix:after {
         clear: both
+    }
+</style>
+<style>
+    #sel_meeting{
+        height:62px;
     }
 </style>
