@@ -28,7 +28,7 @@
         </div>
 
        <el-dialog title="会议池" :visible.sync="dialogVisible"  width="65%">
-            <el-collapse v-model="activeName" accordion>
+            <el-collapse style="height: 165px;" v-model="activeName" accordion>
                 <el-collapse-item name="1">
                     <template slot="title">
                         <i class="header-icon el-icon-search">&nbsp;查询&nbsp;</i>
