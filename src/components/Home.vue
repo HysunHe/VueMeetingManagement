@@ -37,7 +37,7 @@
   
       <el-container style="min-width:1605px;">
         <el-main style="padding:0;">
-          <router-view @set_bg_class="set_bg_class" @set_header_text="set_header"></router-view>
+          <router-view style="width: 100%;height: 100%;" @set_bg_class="set_bg_class" @set_header_text="set_header"></router-view>
         </el-main>
       </el-container>
     </el-container>

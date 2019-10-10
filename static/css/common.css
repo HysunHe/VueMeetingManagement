@@ -214,3 +214,12 @@ body {
 .el-button {
   border-radius: 0;
 }
+
+.el-container {
+  width: calc(100% - 0px) !important;
+  height: calc(100% - 0px) !important;
+}
+
+.el-main {
+  display: flex !important;
+}

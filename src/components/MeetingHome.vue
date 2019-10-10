@@ -55,18 +55,19 @@
                                 style="width: 100%; font-size:18px; color:#333333;">
                                 <el-table-column
                                     prop="meetingName"
-                                    label="方案名称">
+                                    label="方案名称"
+                                    min-width="200">
                                 </el-table-column>
                                 <el-table-column
                                     prop="owner.name"
                                     label="申请人"
-                                    width="180">
+                                    min-width="180">
                                 </el-table-column>
                                 <el-table-column
                                     prop="meetingTime"
                                     label="申请时间"
                                     :formatter="truncDatetime2Mins"
-                                    width="180">
+                                    min-width="180">
                                 </el-table-column>
                             </el-table>
                         </div>
@@ -86,24 +87,25 @@
                                 style="width: 100%; font-size:18px; color:#333333;">
                                 <el-table-column
                                     prop="topicName"
-                                    label="会议议题">
+                                    label="会议议题"
+                                    min-width="200">
                                 </el-table-column>
                                 <el-table-column
                                     prop="applyTime"
                                     label="日期"
                                     :formatter="truncDate"
-                                    width="180">
+                                    min-width="180">
                                 </el-table-column>
                                 <el-table-column
                                     prop="applyTime"
                                     label="时间"
                                     :formatter="truncTime"
-                                    width="90">
+                                    min-width="90">
                                 </el-table-column>
                                 <el-table-column
                                     prop="topicMaxDuration"
                                     label="时长"
-                                    width="90">
+                                    min-width="130">
                                 </el-table-column>
                             </el-table>
                         </div>
