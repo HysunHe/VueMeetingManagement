@@ -207,7 +207,7 @@
 
             // Initialize value list.
             (function(_this){
-                _this.$http.get(_this.baseurl + '/getMeetingStatus').then(function (response) {
+                _this.$http.get(`${_this.baseurl}/getMeetingStatus`).then(function (response) {
                     _this.vl_meetingStatus = response.data;
                 });
                 // _this.$http.get(_this.baseurl + '/getMeetingType').then(function (response) {
@@ -237,7 +237,7 @@
                 }, 100)
             },
             loadTopics(_this) {
-                _this.$http.get(_this.baseurl + '/getMeetingTopics/' + _this.selectedMeeting.meetingId).then(function (response) {
+                _this.$http.get(`${_this.baseurl}/getMeetingTopics/${_this.selectedMeeting.meetingId}`).then(function (response) {
                     _this.meetingTopics = response.data;
                     _this.totalTopics = _this.meetingTopics.length;
                 });
@@ -267,6 +267,24 @@
             handleSelectionChange(val) {
                 this.selectedTopics = val.map(topic => topic.topicId);
                 console.log("Selected topics: " + this.selectedTopics.join(','));
+            },
+            addTopics() {
+                this.$http.put(this.baseurl, {
+                     meetingId: this.selectedMeeting.meetingId,
+                    topicIds: this.selectedTopics
+                }) .then(function (response) {
+                    console.log(response.status + ": " + response.statusText);
+                    this.dialogVisible = false;
+                    if(response.status >= 200 && response.status < 300) {
+                        this.$message({
+                            type: 'info',
+                            message: '保存成功'
+                        });
+                    }
+                })
+            },
+            searchTopics() {
+                // Do search
             }
         }
 	}

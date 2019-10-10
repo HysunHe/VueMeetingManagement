@@ -167,6 +167,33 @@
                 return daterc.substring(0, daterc.lastIndexOf(':'));
             }
         },
+        created() {
+            // Initialize meeting table data 
+            (function(_this){
+                _this.$http.get(`${_this.baseurl}/listMeetingsByPage/1000/1`).then(function (response) {
+                    bus.meeting_list = response.data.list;
+                    if(bus.meeting_list.length > 5) {
+                        _this.meetingList = bus.meeting_list.slice(0,5);
+                    } else {
+                        _this.meetingList = bus.meeting_list;
+                    }
+                    _this.totalMeetings = bus.meeting_list.length;
+                });
+            })(this);
+
+            // Initialize topics table data
+            (function(_this){
+                _this.$http.get(`${_this.baseurl}/listTopicsByPage/1000/1`).then(function (response) {
+                    bus.topic_list = response.data.list;
+                    if(bus.topic_list.length > 5) {
+                        _this.topicList = bus.topic_list.slice(0,5);
+                    } else {
+                        _this.topicList = bus.topic_list;
+                    }
+                    _this.totalTopics = bus.topic_list.length;
+                });
+            })(this);
+        },
         mounted() {
             // Dynamic header text & background image.
             (function(_this){
@@ -181,32 +208,6 @@
                     _this.$emit('set_bg_class', 'bg_content');
                 }
              })(this);
-
-            // Initialize meeting table data 
-            (function(_this){
-                _this.$http.get(_this.baseurl + '/listMeetingsByPage/1000/１').then(function (response) {
-                    bus.meeting_list = response.data.list;
-                    if(bus.meeting_list.length > 5) {
-                        _this.meetingList = bus.meeting_list.slice(0,5);
-                    } else {
-                        _this.meetingList = bus.meeting_list;
-                    }
-                    _this.totalMeetings = bus.meeting_list.length;
-                });
-            })(this);
-
-            // Initialize topics table data
-            (function(_this){
-                _this.$http.get(_this.baseurl + '/listTopicsByPage/1000/１').then(function (response) {
-                    bus.topic_list = response.data.list;
-                    if(bus.topic_list.length > 5) {
-                        _this.topicList = bus.topic_list.slice(0,5);
-                    } else {
-                        _this.topicList = bus.topic_list;
-                    }
-                    _this.totalTopics = bus.topic_list.length;
-                });
-            })(this);
         }
 	}
 </script>

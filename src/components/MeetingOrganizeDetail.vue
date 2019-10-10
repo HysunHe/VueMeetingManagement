@@ -48,23 +48,61 @@
             <el-col :span="24">
                 <div id="supplierRecommendTable">
                     <el-table
-                        :data="tableData"
+                        :data="suppliers"
                         stripe
                         :header-cell-style="headerCcell"
                         style="width: 100%; font-size:18px; color:#333333;">
                         <el-table-column
-                        prop="date"
-                        label="日期"
-                        width="180">
+                            type="index"
+                            label="序号"
+                            align="center">
                         </el-table-column>
                         <el-table-column
-                        prop="name"
-                        label="姓名"
-                        width="180">
+                            prop="supplierName"
+                            label="供应商名称"
+                            min-width="180">
                         </el-table-column>
                         <el-table-column
-                        prop="address"
-                        label="地址">
+                            prop="nature"
+                            label="公司性质"
+                            min-width="180">
+                        </el-table-column>
+                        <el-table-column
+                            prop="isPlatform"
+                            label="是否在采购平台"
+                            align="center"
+                            min-width="80">
+                        </el-table-column>
+                        <el-table-column
+                            prop="isTaxPayer"
+                            label="是否一般纳税"
+                            align="center"
+                            min-width="80">
+                        </el-table-column>
+                        <el-table-column
+                            prop="quality"
+                            label="质量提示认证"
+                            align="center"
+                            min-width="80">
+                        </el-table-column>
+                        <el-table-column
+                            prop="capital"
+                            label="注册资金"
+                            min-width="180">
+                        </el-table-column>
+                        <el-table-column
+                            prop="qualification"
+                            label="资金类别及等级"
+                            min-width="230">
+                        </el-table-column>
+                        <el-table-column
+                            prop="similarProduct"
+                            label="同类产品业绩"
+                            min-width="180">
+                        </el-table-column>
+                        <el-table-column
+                            prop="comment"
+                            label="备注">
                         </el-table-column>
                     </el-table>
                 </div>
@@ -81,29 +119,21 @@
 	export default{
 		data(){
 			 return {
-                tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }]
+                suppliers: []
             }
         },
         methods: {
             headerCcell(row){ 
                 return "font-weight:bold; color:#333333; background-color: #accef8;";
             }
+        },
+        created() {
+            (function(_this){
+                _this.$http.get("../../static/JSON/supplier.json").then(function(response){
+                    console.log(response.data);
+                    _this.suppliers = response.data;
+                });
+            })(this);
         },
         mounted() {
             this.$emit('set_header_text', '详情信息展示');
