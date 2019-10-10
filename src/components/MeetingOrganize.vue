@@ -27,12 +27,9 @@
             </el-select>
         </div>
 
-       <el-dialog title="会议池" :visible.sync="dialogVisible"  width="65%">
-            <el-collapse style="height: 165px;" v-model="activeName" accordion>
-                <el-collapse-item name="1">
-                    <template slot="title">
-                        <i class="header-icon el-icon-search">&nbsp;查询&nbsp;</i>
-                    </template>
+       <el-dialog id="meetingPoolDialog" title="会议池" :visible.sync="dialogVisible"  width="65%">
+            <el-collapse style="height: 180px;" v-model="activeName" accordion>
+                <el-collapse-item name="1" title="筛选条件">
                     <el-form :model="form">
                         <el-row style="margin-bottom:0">
                             <el-col :span="8">
@@ -202,7 +199,6 @@
                     });
                 }
                 _this.topicFullList = bus.topic_list;
-                console.log(_this.topicFullList)
             })(this);
 
             // Initialize value list.
@@ -248,7 +244,6 @@
                 this.loadTopics(this);
             },
             handleClick(row) {
-                console.log(row);
                 this.$alert('正在操作主题：' + row.topic.topicName, '操作', {
                     confirmButtonText: '确定',
                     callback: action => {
@@ -295,9 +290,6 @@
         color:#ffffff;
         margin-top:38px;
     }
-    .el-dialog__body {
-        padding: 15px 20px;
-    }
     .el-row {
         margin-bottom: 30px;
         &:last-child {
@@ -338,5 +330,8 @@
     #topicSelectTable .el-table td, #topicSelectTable .el-table th.is-leaf {
         border-right: 1px solid #636363;
         border-bottom: 1px solid #636363;
+    }
+    #meetingPoolDialog .el-dialog__body {
+        padding-top:5px !important;
     }
 </style>
