@@ -129,7 +129,7 @@
         },
         created() {
             (function(_this){
-                _this.$http.get("../../static/JSON/supplier.json").then(function(response){
+                _this.$http.get(process.env.CONTEXT_PATH + "/static/JSON/supplier.json").then(function(response){
                     console.log(response.data);
                     _this.suppliers = response.data;
                 });
