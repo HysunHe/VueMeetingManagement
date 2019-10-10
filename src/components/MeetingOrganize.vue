@@ -38,9 +38,9 @@
                                 </el-form-item>
                             </el-col>
                             <el-col :span="8">
-                                <el-form-item label="状态" :label-width="formLabelWidth">
-                                    <el-select v-model="form.status" placeholder="请选择">
-                                        <el-option v-for="item in vl_meetingStatus"
+                                <el-form-item label="申请类型" :label-width="formLabelWidth">
+                                    <el-select v-model="form.topicType" placeholder="请选择">
+                                        <el-option v-for="item in vl_topicType"
                                             :key="item.value"
                                             :label="item.key"
                                             :value="item.value">
@@ -55,7 +55,7 @@
                             </el-col>
                         </el-row>
                         <el-row :gutter="0">
-                             <el-button style="float:right; color:#0c7df0" icon="el-icon-search">查询</el-button>
+                             <el-button style="float:right; color:#0c7df0" icon="el-icon-search" @click="searchTopics">查询</el-button>
                         </el-row>
                     </el-form>
                 </el-collapse-item>
@@ -63,7 +63,7 @@
             <el-table
                 id="topicSelectTable"
                 ref="topicSelectTable"
-                :data="topicFullList"
+                :data="topicQueryList"
                 tooltip-effect="dark"
                 max-height="360"
                 style="width: 100%"
@@ -75,34 +75,35 @@
                     type="index"
                     label="序号"
                     align="center"
-                    width="100">
+                    min-width="80">
                 </el-table-column>
                 <el-table-column
                     type="selection"
-                    width="55">
+                    min-width="55">
                 </el-table-column>
                 <el-table-column
                     prop="topicName"
-                    label="议题名称">
+                    label="议题名称"
+                    min-width="200">
                 </el-table-column>
                 <el-table-column
-                    prop="topicApplier"
+                    prop="topicApplier.name"
                     label="申请人"
-                    width="200">
+                    min-width="200">
                 </el-table-column>
                 <el-table-column
                     prop="topicMaxDuration"
                     label="申请类型"
-                    width="200">
+                    min-width="200">
                 </el-table-column>
                 <el-table-column
                     prop="conclusion"
                     label="状态"
-                    width="180">
+                    min-width="120">
                 </el-table-column>
             </el-table>
             <div slot="footer" class="dialog-footer">
-                <el-button style="color:#0c7df0" icon="el-icon-save">保存选择</el-button>
+                <el-button style="color:#0c7df0" icon="el-icon-save" @click="addTopics">保存选择</el-button>
             </div>
         </el-dialog>
 
@@ -182,7 +183,7 @@
                 vl_topicDuration: [],
                 vl_topicType: [],
                 activeName: '1',
-                topicFullList: [],
+                topicQueryList: [],
                 selectedTopics: []
             }
         },
@@ -191,30 +192,30 @@
             (function(_this){
                 _this.meetings = bus.meeting_list;
                 if(bus.meeting_list && bus.meeting_list.length > 0) {
-                    _this.selectedMeeting = bus.meeting_list[bus.meeting_list.length - 1];
+                    _this.selectedMeeting = bus.meeting_list[0];
                     _this.loadTopics(_this);
                 } else {
                     _this.$router.push({
                         path: "/home"
                     });
                 }
-                _this.topicFullList = bus.topic_list;
+                _this.topicQueryList = bus.topic_list;
             })(this);
 
             // Initialize value list.
             (function(_this){
-                _this.$http.get(`${_this.baseurl}/getMeetingStatus`).then(function (response) {
-                    _this.vl_meetingStatus = response.data;
-                });
+                // _this.$http.get(`${_this.baseurl}/getMeetingStatus`).then(function (response) {
+                //     _this.vl_meetingStatus = response.data;
+                // });
                 // _this.$http.get(_this.baseurl + '/getMeetingType').then(function (response) {
                 //     _this.vl_meetingType = response.data;
                 // });
                 // _this.$http.get(_this.baseurl + '/getTopicMaxDuration').then(function (response) {
                 //     _this.vl_topicDuration = response.data;
                 // });
-                // _this.$http.get(_this.baseurl + '/getTopicType').then(function (response) {
-                //     _this.vl_topicType = response.data;
-                // });
+                _this.$http.get(_this.baseurl + '/getTopicType').then(function (response) {
+                    _this.vl_topicType = response.data;
+                });
             })(this);
         },
         mounted() {
@@ -264,22 +265,34 @@
                 console.log("Selected topics: " + this.selectedTopics.join(','));
             },
             addTopics() {
-                this.$http.put(this.baseurl, {
-                     meetingId: this.selectedMeeting.meetingId,
-                    topicIds: this.selectedTopics
+                let _this = this;
+                _this.$http.post(`${_this.baseurl}/addMeetingTopics`, {
+                     meetingId: _this.selectedMeeting.meetingId,
+                    topicIds: _this.selectedTopics.join(',')
                 }) .then(function (response) {
                     console.log(response.status + ": " + response.statusText);
-                    this.dialogVisible = false;
+                    _this.dialogVisible = false;
                     if(response.status >= 200 && response.status < 300) {
-                        this.$message({
+                        _this.loadTopics(_this);
+                        _this.$message({
                             type: 'info',
                             message: '保存成功'
                         });
                     }
-                })
+                });
             },
             searchTopics() {
-                // Do search
+                let _this = this;
+                _this.$http.post(`${_this.baseurl}/searchTopic`, {
+                    pageSize: "1000",
+                    pageNum:"1",
+                    applierName: _this.form.applier,
+                    topicName: _this.form.name,
+                    topicType: _this.form.topicType
+                }) .then(function (response) {
+                    console.log(response.status + ": " + response.statusText);
+                    _this.topicQueryList  = response.data.list;
+                });
             }
         }
 	}
