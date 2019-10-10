@@ -13,7 +13,7 @@
 		</div>
 
         <div  class="clear clearfix" style="margin-top:74px;">
-             <el-button style="float:left;" type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 添加</el-button>
+             <el-button style="float:left;" type="text" class="button" @click="dialogVisible = true"><img  class="button_img_size" src="../assets/add.png"> 添加</el-button>
             <el-button style="float:left; margin-left:26px;"  type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 结束</el-button>
             <el-button  style="float:right;" type="text" class="button" @click="selectMeeting"><img  class="button_img_size" src="../assets/add.png"> 会议选择</el-button>
             <el-select  id="sel_meeting" ref="sel_meeting" style="float:right; " v-if="showMeetingSelBox" v-model="selectedMeeting" value-key="meetingId"  
@@ -27,21 +27,85 @@
             </el-select>
         </div>
 
-       <el-dialog title="添加主题" :visible.sync="dialogVisible">
-            <el-form :model="form">
-                <el-form-item label="活动名称" :label-width="formLabelWidth">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="活动区域" :label-width="formLabelWidth">
-                <el-select v-model="form.region" placeholder="请选择活动区域">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                </el-select>
-                </el-form-item>
-            </el-form>
+       <el-dialog title="会议池" :visible.sync="dialogVisible"  width="65%">
+            <el-collapse v-model="activeName" accordion>
+                <el-collapse-item name="1">
+                    <template slot="title">
+                        <i class="header-icon el-icon-search">&nbsp;查询&nbsp;</i>
+                    </template>
+                    <el-form :model="form">
+                        <el-row style="margin-bottom:0">
+                            <el-col :span="8">
+                                <el-form-item label="申请人" :label-width="formLabelWidth">
+                                    <el-input v-model="form.applier" autocomplete="off"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-form-item label="状态" :label-width="formLabelWidth">
+                                    <el-select v-model="form.status" placeholder="请选择">
+                                        <el-option v-for="item in vl_meetingStatus"
+                                            :key="item.value"
+                                            :label="item.key"
+                                            :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-form-item label="议题名称" :label-width="formLabelWidth">
+                                    <el-input v-model="form.name" autocomplete="off"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="0">
+                             <el-button style="float:right; color:#0c7df0" icon="el-icon-search">查询</el-button>
+                        </el-row>
+                    </el-form>
+                </el-collapse-item>
+            </el-collapse>
+            <el-table
+                id="topicSelectTable"
+                ref="topicSelectTable"
+                :data="topicFullList"
+                tooltip-effect="dark"
+                max-height="360"
+                style="width: 100%"
+                stripe
+                border
+                :header-cell-style="headerCcell"
+                @selection-change="handleSelectionChange">
+                <el-table-column
+                    type="index"
+                    label="序号"
+                    align="center"
+                    width="100">
+                </el-table-column>
+                <el-table-column
+                    type="selection"
+                    width="55">
+                </el-table-column>
+                <el-table-column
+                    prop="topicName"
+                    label="议题名称">
+                </el-table-column>
+                <el-table-column
+                    prop="topicApplier"
+                    label="申请人"
+                    width="200">
+                </el-table-column>
+                <el-table-column
+                    prop="topicMaxDuration"
+                    label="申请类型"
+                    width="200">
+                </el-table-column>
+                <el-table-column
+                    prop="conclusion"
+                    label="状态"
+                    width="180">
+                </el-table-column>
+            </el-table>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                <el-button style="color:#0c7df0" icon="el-icon-save">保存选择</el-button>
             </div>
         </el-dialog>
 
@@ -109,27 +173,52 @@
                 dialogVisible: false,
                 form: {
                     name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
+                    topicType: '',
+                    meetingType: '',
+                    status: '',
+                    applier: '',
+                    duration: ''
                 },
-                formLabelWidth: '120px'
+                formLabelWidth: '80px',
+                vl_meetingStatus: [],
+                vl_meetingType: [],
+                vl_topicDuration: [],
+                vl_topicType: [],
+                activeName: '1',
+                topicFullList: [],
+                selectedTopics: []
             }
         },
         created() {
+            // Load topic data
             (function(_this){
-                console.log("Loading topics");
                 _this.meetings = bus.meeting_list;
                 if(bus.meeting_list && bus.meeting_list.length > 0) {
                     _this.selectedMeeting = bus.meeting_list[bus.meeting_list.length - 1];
                     _this.loadTopics(_this);
                 } else {
-                    console.warn("Meeting list is not populated yet!");
+                    _this.$router.push({
+                        path: "/home"
+                    });
                 }
+                _this.topicFullList = bus.topic_list;
+                console.log(_this.topicFullList)
+            })(this);
+
+            // Initialize value list.
+            (function(_this){
+                _this.$http.get(_this.baseurl + '/getMeetingStatus').then(function (response) {
+                    _this.vl_meetingStatus = response.data;
+                });
+                // _this.$http.get(_this.baseurl + '/getMeetingType').then(function (response) {
+                //     _this.vl_meetingType = response.data;
+                // });
+                // _this.$http.get(_this.baseurl + '/getTopicMaxDuration').then(function (response) {
+                //     _this.vl_topicDuration = response.data;
+                // });
+                // _this.$http.get(_this.baseurl + '/getTopicType').then(function (response) {
+                //     _this.vl_topicType = response.data;
+                // });
             })(this);
         },
         mounted() {
@@ -174,6 +263,10 @@
                 this.$router.push({
                   path: "/organize/detail"
                 });
+            },
+            handleSelectionChange(val) {
+                this.selectedTopics = val.map(topic => topic.topicId);
+                console.log("Selected topics: " + this.selectedTopics.join(','));
             }
         }
 	}
@@ -183,6 +276,9 @@
         font-size: 22px;
         color:#ffffff;
         margin-top:38px;
+    }
+    .el-dialog__body {
+        padding: 15px 20px;
     }
     .el-row {
         margin-bottom: 30px;
@@ -218,6 +314,10 @@
         height:62px;
     }
     #topicsTable .el-table td, #topicsTable .el-table th.is-leaf {
+        border-right: 1px solid #636363;
+        border-bottom: 1px solid #636363;
+    }
+    #topicSelectTable .el-table td, #topicSelectTable .el-table th.is-leaf {
         border-right: 1px solid #636363;
         border-bottom: 1px solid #636363;
     }
