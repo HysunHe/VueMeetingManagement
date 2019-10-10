@@ -1,0 +1,122 @@
+[
+   {
+      "supplierId":"1",
+      "supplierName":"Lenovo",
+      "nature":"有限责任公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"1000万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"2",
+      "supplierName":"IBM",
+      "nature":"外资有限责任公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"5000万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"3",
+      "supplierName":"惠普（中国）",
+      "nature":"外企有限责任公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"3000万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"4",
+      "supplierName":"埃森哲",
+      "nature":"股份有限公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"5000万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"5",
+      "supplierName":"华为公司",
+      "nature":"股份有限责任公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"6000万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"6",
+      "supplierName":"中兴通讯",
+      "nature":"有限责任公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"500万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"7",
+      "supplierName":"甲骨文公司",
+      "nature":"外资企业",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"9000万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"8",
+      "supplierName":"东软集团",
+      "nature":"有限责任公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"1000万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"9",
+      "supplierName":"迈瑞",
+      "nature":"有限责任公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"600万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   },
+   {
+      "supplierId":"10",
+      "supplierName":"中国建筑",
+      "nature":"国有股份公司",
+      "isPlatform":"是",
+      "isTaxPayer":"是",
+      "quality":"通过",
+      "capital":"3000万元",
+      "qualification ":"建筑工程施工总包三级",
+      "similarProduct":"是",
+      "comment":""
+   }
+]
