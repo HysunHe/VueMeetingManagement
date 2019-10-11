@@ -252,9 +252,11 @@
             height:120px;
         }
         .bottom {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 20px;
+            margin-left: 530px
         }
-
         .button {
             padding: 0;
             float: right;
