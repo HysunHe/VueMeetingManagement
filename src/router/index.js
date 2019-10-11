@@ -14,7 +14,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: '首页',
+      name: '会议中心',
       component: home,
       redirect: '/home',
       children: [

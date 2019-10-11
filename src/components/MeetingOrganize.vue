@@ -1,7 +1,7 @@
 <template>
     <div style="margin-left:52px; margin-right:52px;">
         <el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
-            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/home' }">会议中心</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
         </el-breadcrumb>
 
@@ -75,31 +75,31 @@
                     type="index"
                     label="序号"
                     align="center"
-                    min-width="80">
+                    width="60">
                 </el-table-column>
                 <el-table-column
                     type="selection"
-                    min-width="55">
+                    min-width="30">
                 </el-table-column>
                 <el-table-column
                     prop="topicName"
                     label="议题名称"
-                    min-width="200">
+                    min-width="80">
                 </el-table-column>
                 <el-table-column
                     prop="topicApplier.name"
                     label="申请人"
-                    min-width="200">
+                    min-width="50">
                 </el-table-column>
                 <el-table-column
-                    prop="topicMaxDuration"
+                    prop="topicType"
                     label="申请类型"
-                    min-width="200">
+                    min-width="50">
                 </el-table-column>
                 <el-table-column
                     prop="conclusion"
                     label="状态"
-                    min-width="120">
+                    min-width="50">
                 </el-table-column>
             </el-table>
             <div slot="footer" class="dialog-footer">
@@ -117,7 +117,7 @@
                     type="index"
                     label="序号"
                     align="center"
-                    width="100">
+                    width="60">
                 </el-table-column>
                 <el-table-column
                     label="议题名称">
@@ -128,23 +128,23 @@
                 <el-table-column
                     prop="topic.topicApplier.name"
                     label="申请人"
-                    width="200">
+                    min-width="60">
                 </el-table-column>
                 <el-table-column
-                    prop="topicMaxDuration"
+                    prop="topicType"
                     label="申请类型"
-                    width="200">
+                    min-width="50">
                 </el-table-column>
                 <el-table-column
                     prop="conclusion"
                     label="状态"
-                    width="180">
+                    min-width="50">
                 </el-table-column>
                 <el-table-column
                     fixed="right"
                     label="操作"
                     align="center"
-                    width="180">
+                    min-width="50">
                     <template slot-scope="scope">
                         <el-button @click="handleClick(scope.row)" type="text" size="small">更改</el-button>
                     </template>

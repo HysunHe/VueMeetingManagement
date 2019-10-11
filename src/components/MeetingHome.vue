@@ -3,7 +3,7 @@
 		<div class="top-msg-region">
 			<el-row  style="font-size:20px;">
 				<el-col :span="12" style="margin:0; padding:0;">
-					<span style="padding-left:52px; display: inline-block; margin-top: 45px;">最近会议时间：</span><span>2019/09/24 16:08:23 </span>
+					<span style="padding-left:10px; display: inline-block; margin-top: 45px;">最近会议时间：</span><span>2019/09/24 16:08:23 </span>
 				</el-col>
 				<el-col :span="12" style="margin:0; padding:0;">
 					<span style="display: inline-block; margin-top: 45px;">未加入会议议题：</span><span style="font-size:34px; color:#ffed27;">年末销售提升方案</span>
@@ -11,7 +11,7 @@
 			</el-row>
 		</div>
 
-        <div style="margin-left:52px;">
+        <div> <!-- style="margin-left:52px;" -->
             <el-row type="flex" :gutter="50">
                 <el-col :span="24">
                     <el-card class="box-card">
@@ -198,7 +198,7 @@
             // Dynamic header text & background image.
             (function(_this){
                 if(_this.$route.path === '/home') {
-                    _this.$emit('set_header_text', '首页');
+                    _this.$emit('set_header_text', '会议中心');
                     _this.$emit('set_bg_class', 'bg_home');
                 } else if(_this.$route.path === '/organize') {
                     _this.$emit('set_header_text', '会议组织');
@@ -220,10 +220,6 @@
 		.table-card {
             width:723px;
             height:476px;
-  /*          
-			max-height:476px;
-            min-height: 476px;
-*/
             display: inline-table;
             border: 1px solid;
             border-color: #4f718a;

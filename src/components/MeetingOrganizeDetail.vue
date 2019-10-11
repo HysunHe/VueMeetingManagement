@@ -1,7 +1,7 @@
 <template>
     <div style="margin-left:52px; margin-right:52px;">
         <el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/' }">会议中心</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
              <el-breadcrumb-item :to="{ path: '/organize/detail' }">详情信息展示</el-breadcrumb-item>
         </el-breadcrumb>
@@ -60,45 +60,45 @@
                         <el-table-column
                             prop="supplierName"
                             label="供应商名称"
-                            min-width="180">
+                            min-width="80">
                         </el-table-column>
                         <el-table-column
                             prop="nature"
                             label="公司性质"
-                            min-width="180">
+                            min-width="60">
                         </el-table-column>
                         <el-table-column
                             prop="isPlatform"
                             label="是否在采购平台"
                             align="center"
-                            min-width="80">
+                            min-width="40">
                         </el-table-column>
                         <el-table-column
                             prop="isTaxPayer"
                             label="是否一般纳税"
                             align="center"
-                            min-width="80">
+                            min-width="40">
                         </el-table-column>
                         <el-table-column
                             prop="quality"
                             label="质量提示认证"
                             align="center"
-                            min-width="80">
+                            min-width="40">
                         </el-table-column>
                         <el-table-column
                             prop="capital"
                             label="注册资金"
-                            min-width="180">
+                            min-width="50">
                         </el-table-column>
                         <el-table-column
                             prop="qualification"
                             label="资金类别及等级"
-                            min-width="230">
+                            min-width="80">
                         </el-table-column>
                         <el-table-column
                             prop="similarProduct"
                             label="同类产品业绩"
-                            min-width="180">
+                            min-width="40">
                         </el-table-column>
                         <el-table-column
                             prop="comment"
