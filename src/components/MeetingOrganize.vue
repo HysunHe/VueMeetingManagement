@@ -13,7 +13,7 @@
 		</div>
 
         <div  class="clear clearfix" style="margin-top:74px;">
-             <el-button style="float:left;" type="text" class="button" @click="dialogVisible = true"><img  class="button_img_size" src="../assets/add.png"> 添加</el-button>
+             <el-button style="float:left;" type="text" class="button" @click="openDialog"><img  class="button_img_size" src="../assets/add.png"> 添加</el-button>
             <el-button style="float:left; margin-left:26px;"  type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 结束</el-button>
             <el-button  style="float:right;" type="text" class="button" @click="selectMeeting"><img  class="button_img_size" src="../assets/add.png"> 会议选择</el-button>
             <el-select  id="sel_meeting" ref="sel_meeting" style="float:right; " v-if="showMeetingSelBox" v-model="selectedMeeting" value-key="meetingId"  
@@ -199,7 +199,6 @@
                         path: "/home"
                     });
                 }
-                _this.topicQueryList = bus.topic_list;
             })(this);
 
             // Initialize value list.
@@ -264,12 +263,21 @@
                 this.selectedTopics = val.map(topic => topic.topicId);
                 console.log("Selected topics: " + this.selectedTopics.join(','));
             },
+            openDialog() {
+                this.dialogVisible = true;
+                if(this.$refs.topicSelectTable) {
+                    this.$refs.topicSelectTable.clearSelection();
+                }
+                // Exclude already included topics in the search result
+                let existedTopics = this.meetingTopics.map(topic => topic.topicId);
+                this.topicQueryList = bus.topic_list.filter( e => !existedTopics.includes(e.topicId) );
+            },
             addTopics() {
                 let _this = this;
                 _this.$http.post(`${_this.baseurl}/addMeetingTopics`, {
                      meetingId: _this.selectedMeeting.meetingId,
                     topicIds: _this.selectedTopics.join(',')
-                }) .then(function (response) {
+                }).then(function (response) {
                     console.log(response.status + ": " + response.statusText);
                     _this.dialogVisible = false;
                     if(response.status >= 200 && response.status < 300) {
@@ -291,7 +299,9 @@
                     topicType: _this.form.topicType
                 }) .then(function (response) {
                     console.log(response.status + ": " + response.statusText);
-                    _this.topicQueryList  = response.data.list;
+                    // Exclude already included topics in the search result
+                    let existedTopics = _this.meetingTopics.map(topic => topic.topicId);
+                    _this.topicQueryList = response.data.list.filter( e =>!existedTopics.includes(parseInt(e.topicId)) );
                 });
             }
         }
