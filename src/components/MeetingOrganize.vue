@@ -65,8 +65,9 @@
                 ref="topicSelectTable"
                 :data="topicQueryList"
                 tooltip-effect="dark"
-                max-height="360"
+                min-height="300"
                 style="width: 100%"
+                empty-text="所有可用的主题都已经加到了此会议中，暂无更多可添加的主题了"
                 stripe
                 border
                 :header-cell-style="headerCcell"
@@ -131,7 +132,7 @@
                     min-width="60">
                 </el-table-column>
                 <el-table-column
-                    prop="topicType"
+                    prop="topic.topicType"
                     label="申请类型"
                     min-width="50">
                 </el-table-column>
@@ -153,7 +154,7 @@
         </div>
 
         <div style="float:right;">
-            <el-pagination layout="prev, next, total"  :page-size="15" :total="totalTopics">
+            <el-pagination layout="prev, next, total"  :page-size="20" :total="totalTopics">
             </el-pagination>
         </div>
     </div>
@@ -236,9 +237,16 @@
                 _this.$http.get(`${_this.baseurl}/getMeetingTopics/${_this.selectedMeeting.meetingId}`).then(function (response) {
                     _this.meetingTopics = response.data;
                     _this.totalTopics = _this.meetingTopics.length;
+                    // Exclude already included topics in the search result
+                    let existedTopics = _this.meetingTopics.map(topic => topic.topicId);
+                    _this.topicQueryList = [...bus.topic_list].filter( e => !existedTopics.includes(parseInt(e.topicId)) );
+                    console.log("orig: ", bus.topic_list);
+                    console.log("meetingTopics: ", _this.meetingTopics);
+                    console.log("topicQueryList: ", _this.topicQueryList);
                 });
             },
             onMeetingSelect() {
+                console.log("onMeetingSelect");
                 this.$refs.sel_meeting.blur();
                 this.showMeetingSelBox = false;
                 this.loadTopics(this);
@@ -270,7 +278,7 @@
                 }
                 // Exclude already included topics in the search result
                 let existedTopics = this.meetingTopics.map(topic => topic.topicId);
-                this.topicQueryList = bus.topic_list.filter( e => !existedTopics.includes(e.topicId) );
+                this.topicQueryList = [...bus.topic_list].filter( e => !existedTopics.includes(parseInt(e.topicId)) );
             },
             addTopics() {
                 let _this = this;
