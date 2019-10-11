@@ -11,7 +11,7 @@
 			</el-row>
 		</div>
 
-        <div> <!-- style="margin-left:52px;" -->
+        <div id="meetingHome"> <!-- style="margin-left:52px;" -->
             <el-row type="flex" :gutter="50">
                 <el-col :span="24">
                     <el-card class="box-card">
@@ -71,9 +71,9 @@
                                 </el-table-column>
                             </el-table>
                         </div>
-                        <div class="bottom clearfix">
+                        <!--div class="bottom clearfix">
                             <el-button type="text" class="button" @click="showAllMeetingList()">查看申请列表</el-button>
-                        </div>
+                        </div-->
                     </el-card>
                    <el-card class="table-card" style="margin-left:22px;">
                         <div slot="header" class="clearfix">
@@ -109,9 +109,9 @@
                                 </el-table-column>
                             </el-table>
                         </div>
-                        <div class="bottom clearfix">
+                        <!--div class="bottom clearfix">
                             <el-button type="text" class="button" @click="showAllTopicList()">查看申请列表</el-button>
-                        </div>
+                        </div-->
                     </el-card>
                 </el-col>			
             </el-row>
@@ -172,11 +172,11 @@
             (function(_this){
                 _this.$http.get(`${_this.baseurl}/listMeetingsByPage/1000/1`).then(function (response) {
                     bus.meeting_list = response.data.list;
-                    if(bus.meeting_list.length > 5) {
-                        _this.meetingList = bus.meeting_list.slice(0,5);
-                    } else {
+                    // if(bus.meeting_list.length > 5) {
+                    //     _this.meetingList = bus.meeting_list.slice(0,5);
+                    // } else {
                         _this.meetingList = bus.meeting_list;
-                    }
+                    // }
                     _this.totalMeetings = bus.meeting_list.length;
                 });
             })(this);
@@ -255,6 +255,14 @@
             position: absolute;
             bottom: 0;
             margin-bottom: 20px;
+            margin-top: 20px;
+            margin-left: 530px
+        }
+        .bottom2 {
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 20px;
+            margin-top: 20px;
             margin-left: 530px
         }
         .button {
@@ -274,4 +282,11 @@
         .clearfix:after {
             clear: both
         }
+</style>
+
+<style>
+    #meetingHome  .el-table__body-wrapper {
+        overflow: scroll !important;
+        max-height: 260px !important;
+    }
 </style>
