@@ -2,23 +2,17 @@
   <div>
     <div>
       <el-header height="85px" style="text-align:center;">
-        <img v-if="!iscloseNav" src="../assets/menu.png" style="width:30px;height:30px;position: absolute;left: 182px; cursor:pointer;" title="最小化菜单"  @click="minimizeNav">
+        <img src="../assets/menu.png" style="width:30px;height:30px; position:absolute; left:182px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
         <span style="font-size:36px;">{{headerText}}</span>
-        <div v-if="!iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
-           <img  src="../assets/logo.png">
+        <div  style="display:flex; justify-content:center; position:absolute; left:0; top:0; height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
+           <div style="margin-top:5px;"><img  src="../assets/avatar.png"> </div>
+          <div style="display:flex;flex-direction:column;margin-left: 10px;">
+            <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
           </div>
-        <div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
-           <img  style="width: 50%; min-width: 30px; cursor:pointer;" src="../assets/menu.png" title="显示菜单面板" @click="expandNav">
-          </div>
-        <div style="float: right;color:#fff; font-size: 12px;margin-right:50px;">
-          <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px;color:#fff;"></i>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-          <span>{{userName}}</span>
         </div>
+        <!--div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
+           <img  style="width: 50%; min-width: 30px; cursor:pointer;" src="../assets/menu.png" title="显示菜单面板" @click="expandNav">
+          </div-->
         <div class="clear"></div>
       </el-header>
     </div>
@@ -67,7 +61,7 @@
       };
     },
     mounted() {
-      this.minimizeNav();
+      // this.minimizeNav();
     },
     methods: {
       set_bg_class(className) {
@@ -80,12 +74,19 @@
       },
       minimizeNav() {
         this.iscloseNav = true;
-        this.menvNavPanelWidth="60px"
+        this.menvNavPanelWidth="0px"
       },
       expandNav() {
         this.iscloseNav = false;
         this.menvNavPanelWidth="182px";
-      }
+      },
+      toggleNav() {
+        if(this.iscloseNav) {
+          this.expandNav();
+        } else {
+          this.minimizeNav();
+        }
+      },
     }
   };
 </script>
