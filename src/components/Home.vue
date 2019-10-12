@@ -60,6 +60,9 @@
         menvNavPanelWidth: "182px"
       };
     },
+    mounted() {
+      this.minimizeNav();
+    },
     methods: {
       set_bg_class(className) {
         console.log("[Home]set bg_class to " + className);

@@ -223,3 +223,7 @@ body {
 .el-main {
   display: flex !important;
 }
+
+body {
+  scrollbar-width: 3px
+}
