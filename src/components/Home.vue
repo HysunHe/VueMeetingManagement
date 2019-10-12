@@ -37,6 +37,12 @@
               <span v-if="!iscloseNav" style="display:block; font-size:18px; font-weight:bold;">供应商管理</span>
             </span>
           </div> 
+          <div :class="iscloseNav ? 'menu-button-small' : 'menu-button'">
+            <span style="cursor:pointer;">
+              <img  :style="iscloseNav? 'padding-top:20px; width: 50%; min-width: 30px;' : 'padding-top:22px;'" src="../assets/setup.png">
+              <span v-if="!iscloseNav" style="display:block; font-size:18px; font-weight:bold;">我的设置</span>
+            </span>
+          </div> 
       </el-aside>
   
       <el-container>
