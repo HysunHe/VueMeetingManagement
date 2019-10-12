@@ -94,29 +94,5 @@
       "qualification":"建筑工程施工总包三级",
       "similarProduct":"是",
       "comment":""
-   },
-   {
-      "supplierId":"9",
-      "supplierName":"迈瑞",
-      "nature":"有限责任公司",
-      "isPlatform":"是",
-      "isTaxPayer":"是",
-      "quality":"通过",
-      "capital":"600万元",
-      "qualification":"建筑工程施工总包三级",
-      "similarProduct":"是",
-      "comment":""
-   },
-   {
-      "supplierId":"10",
-      "supplierName":"中国建筑",
-      "nature":"国有股份公司",
-      "isPlatform":"是",
-      "isTaxPayer":"是",
-      "quality":"通过",
-      "capital":"3000万元",
-      "qualification":"建筑工程施工总包三级",
-      "similarProduct":"是",
-      "comment":""
    }
 ]

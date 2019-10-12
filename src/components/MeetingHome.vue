@@ -185,11 +185,11 @@
             (function(_this){
                 _this.$http.get(`${_this.baseurl}/listTopicsByPage/1000/1`).then(function (response) {
                     bus.topic_list = response.data.list;
-                    if(bus.topic_list.length > 5) {
-                        _this.topicList = bus.topic_list.slice(0,5);
-                    } else {
+                    // if(bus.topic_list.length > 5) {
+                    //     _this.topicList = bus.topic_list.slice(0,5);
+                    // } else {
                         _this.topicList = bus.topic_list;
-                    }
+                    // }
                     _this.totalTopics = bus.topic_list.length;
                 });
             })(this);
