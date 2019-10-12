@@ -219,7 +219,6 @@
 		}
 		.table-card {
             width:723px;
-            height:calc(100vh-300px);
             display: inline-table;
             border: 1px solid;
             border-color: #4f718a;
