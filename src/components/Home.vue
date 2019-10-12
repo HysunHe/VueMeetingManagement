@@ -39,7 +39,7 @@
           </div> 
       </el-aside>
   
-      <el-container style="min-width:1605px;">
+      <el-container>
         <el-main style="padding:0;">
           <router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header"></router-view>
         </el-main>
@@ -97,9 +97,11 @@
   background-size: 100% 100%;
 }
 
-.content_size {
+.bg_home .content_size {
   margin:auto;
   height: 100%;
+  width: fit-content;
+  min-width: 1502px;
 }
 
 .bg_content .content_size {
