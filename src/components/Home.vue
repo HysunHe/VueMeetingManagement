@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <div>
       <el-header height="85px" style="text-align:center;">
         <img v-if="!iscloseNav" src="../assets/menu.png" style="width:30px;height:30px;position: absolute;left: 182px; cursor:pointer;" title="最小化菜单"  @click="minimizeNav">

@@ -41,7 +41,7 @@
                 </el-col>					
             </el-row>
 
-            <el-row type="flex" style="margin-top:60px;">
+            <el-row type="flex" class="tablesection">
                 <el-col :span="24">
                     <el-card class="table-card" style="margin-right:22px;">
                         <div slot="header" class="clearfix">
@@ -219,7 +219,7 @@
 		}
 		.table-card {
             width:723px;
-            height:476px;
+            height:calc(100vh-300px);
             display: inline-table;
             border: 1px solid;
             border-color: #4f718a;
@@ -252,18 +252,7 @@
             height:120px;
         }
         .bottom {
-            position: absolute;
-            bottom: 0;
-            margin-bottom: 20px;
             margin-top: 20px;
-            margin-left: 530px
-        }
-        .bottom2 {
-            position: absolute;
-            bottom: 0;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            margin-left: 530px
         }
         .button {
             padding: 0;
@@ -282,11 +271,18 @@
         .clearfix:after {
             clear: both
         }
+        .tablesection {
+            margin-top:60px;
+            height:calc(100vh - 600px);
+        }
 </style>
 
 <style>
+    #meetingHome {
+        height: calc(100vh - 196px);
+    }
     #meetingHome  .el-table__body-wrapper {
-        overflow: scroll !important;
-        max-height: 260px !important;
+        overflow-y: auto !important;
+        height:calc(100vh - 743px);
     }
 </style>
