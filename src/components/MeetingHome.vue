@@ -77,7 +77,7 @@
                     </el-card>
                    <el-card class="table-card" style="margin-left:22px;">
                         <div slot="header" class="clearfix">
-                            <span style="font-size:24px; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">{{totalTopics}}</span>会议申请等待安排）</span>
+                            <span style="font-size:24px; color:#333333; font-weight:600;">会议安排（当前有<span style="color:#ff200f;">{{totalTopics}}</span>会议申请等待安排）</span>
                         </div>
                         <div>
                             <el-table
