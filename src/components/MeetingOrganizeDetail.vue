@@ -1,5 +1,5 @@
 <template>
-    <div style="margin-left:52px; margin-right:52px;">
+    <div style="margin-left:32px; margin-right:52px;">
         <!-- el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
             <el-breadcrumb-item :to="{ path: '/' }">会议中心</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
