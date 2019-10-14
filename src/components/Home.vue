@@ -6,13 +6,22 @@
         <div  style="display:flex; justify-content:center; position:absolute; left:0; top:0; height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
            <div style="margin-top:5px;"><img  src="../assets/avatar.png"> </div>
           <div style="display:flex;flex-direction:column;margin-left: 10px;">
-            <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
-          </div>
+          <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
+        </div>
+        <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" style="position:absolute; left:182px; top:0;">
+          <el-tab-pane
+            v-for="(item, index) in editableTabs"
+            :key="item.name"
+            :label="item.title"
+            :name="item.name"
+          >
+          </el-tab-pane>
+        </el-tabs>
         </div>
         <!--div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
            <img  style="width: 50%; min-width: 30px; cursor:pointer;" src="../assets/menu.png" title="显示菜单面板" @click="expandNav">
           </div-->
-          <div class="clear"></div>
+        <div class="clear"></div>
       </el-header>
     </div>
  
@@ -61,7 +70,19 @@
         bg_class: 'bg_home',
         headerText: "会议中心",
         iscloseNav:  false,
-        menvNavPanelWidth: "182px"
+        menvNavPanelWidth: "182px",
+
+          editableTabsValue: '2',
+          editableTabs: [{
+            title: 'Tab 1',
+            name: '1',
+            content: 'Tab 1 content'
+          }, {
+            title: 'Tab 2',
+            name: '2',
+            content: 'Tab 2 content'
+          }],
+          tabIndex: 2
       };
     },
     mounted() {
@@ -91,6 +112,32 @@
           this.minimizeNav();
         }
       },
+      addTab(targetName) {
+        let newTabName = ++this.tabIndex + '';
+        this.editableTabs.push({
+          title: 'New Tab',
+          name: newTabName,
+          content: 'New Tab content'
+        });
+        this.editableTabsValue = newTabName;
+      },
+      removeTab(targetName) {
+        let tabs = this.editableTabs;
+        let activeName = this.editableTabsValue;
+        if (activeName === targetName) {
+          tabs.forEach((tab, index) => {
+            if (tab.name === targetName) {
+              let nextTab = tabs[index + 1] || tabs[index - 1];
+              if (nextTab) {
+                activeName = nextTab.name;
+              }
+            }
+          });
+        }
+        
+        this.editableTabsValue = activeName;
+        this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+      }
     }
   };
 </script>
