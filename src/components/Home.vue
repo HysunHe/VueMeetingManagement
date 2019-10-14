@@ -144,6 +144,7 @@
         }
         this.activeTab = activeName;
         this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+        delete this.datacache[targetName];
       }
     }
   };

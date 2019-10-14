@@ -13,6 +13,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$http = axios;
 Vue.prototype.baseurl = 'https://o100.odainfra.com/faw_backend';
+Vue.prototype.datacache = {};
 
 /* eslint-disable no-new */
 new Vue({

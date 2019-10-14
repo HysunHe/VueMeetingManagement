@@ -172,6 +172,12 @@
             }
         },
         created() {
+            if(this.datacache["meetingcenter"]) {
+                this._data = this.datacache["meetingcenter"];
+                return true;
+            } 
+            this.datacache["meetingcenter"] = this._data;
+
             // Initialize meeting table data 
             (function(_this){
                 _this.$http.get(`${_this.baseurl}/listMeetingsByPage/1000/1`).then(function (response) {

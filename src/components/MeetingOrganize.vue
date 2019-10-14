@@ -189,6 +189,12 @@
             }
         },
         created() {
+            if(this.datacache["organize"]) {
+                this._data = this.datacache["organize"];
+                return true;
+            } 
+            this.datacache["organize"] = this._data;
+
             // Load topic data
             (function(_this){
                 _this.meetings = bus.meeting_list;

@@ -245,7 +245,7 @@ body {
   border-bottom: none;
 }
 
-.el-tabs__item {
+.el-tabs__item, .el-tabs__item:hover {
   background: #ffffff;
   margin-left:15px;
   font-size:18px;
@@ -253,11 +253,12 @@ body {
   /*width:132px;*/
   width: auto;
   text-align: center;
+  padding-right:0 !important;
 }
 
 .el-tabs--card>.el-tabs__header .el-tabs__item .el-icon-close {
   top: -6px;
-  right: -28px;
+  right: -10px;
   border-radius: 50%;    
   height: 15px;    
   width: 17px !important;    

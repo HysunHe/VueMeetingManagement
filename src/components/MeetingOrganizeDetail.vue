@@ -130,6 +130,12 @@
             }
         },
         created() {
+            if(this.datacache["organizedetail"]) {
+                this._data = this.datacache["organizedetail"];
+                return true;
+            } 
+            this.datacache["organizedetail"] = this._data;
+
             (function(_this){
                 _this.$http.get(process.env.CONTEXT_PATH + "/static/JSON/supplier.json").then(function(response){
                     _this.suppliers = response.data;
