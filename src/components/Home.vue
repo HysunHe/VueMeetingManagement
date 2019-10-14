@@ -10,11 +10,10 @@
         </div>
         <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" style="position:absolute; left:182px; top:0;">
           <el-tab-pane
-            v-for="(item, index) in editableTabs"
+            v-for="(item) in editableTabs"
             :key="item.name"
             :label="item.title"
-            :name="item.name"
-          >
+            :name="item.name">
           </el-tab-pane>
         </el-tabs>
         </div>
@@ -53,7 +52,7 @@
             <span style="font-size:36px;vertical-align:middle;display: table-cell;">{{headerText}}</span>
           </div>
           <el-main style="padding:0;">
-            <router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header"></router-view>
+            <router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab"></router-view>
           </el-main>
         </div>
       </el-container>
@@ -96,6 +95,9 @@
       set_header(headerText) {
         console.log("[Home]set headerText to " + headerText);
         this.headerText = headerText;
+      },
+      set_tab(idx) {
+
       },
       minimizeNav() {
         this.iscloseNav = true;
