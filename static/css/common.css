@@ -250,15 +250,17 @@ body {
   margin-left:15px;
   font-size:18px;
   color:#205796;
-  width:132px;
+  /*width:132px;*/
+  width: auto;
+  text-align: center;
 }
 
 .el-tabs--card>.el-tabs__header .el-tabs__item .el-icon-close {
   top: -6px;
-  right: -35px;
+  right: -28px;
   border-radius: 50%;    
   height: 15px;    
-  width: 17px;    
+  width: 17px !important;    
   display: inline-block;    
   background: #ffffff;      
   vertical-align: top;

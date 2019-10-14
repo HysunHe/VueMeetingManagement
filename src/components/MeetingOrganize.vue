@@ -263,8 +263,12 @@
                 });
             },
             checkTopicDetail(row) {
-                this.$router.push({
-                  path: "/organize/detail"
+                // this.$router.push({
+                //   path: "/organize/detail"
+                // });
+                this.$emit('set_tab', {
+                    title: '详情信息展示',
+                    name: 'organizedetail'
                 });
             },
             handleSelectionChange(val) {

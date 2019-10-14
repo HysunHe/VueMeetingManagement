@@ -2,13 +2,13 @@
   <div>
     <div>
       <el-header height="86px" style="text-align:center;">
-        <img src="../assets/menu.png" style="width:22px;height:20px; position:absolute; left:182px; top:2px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
         <div  style="display:flex; justify-content:center; position:absolute; left:0; top:0; height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
-           <div style="margin-top:5px;"><img  src="../assets/avatar.png"> </div>
+          <img src="../assets/menu.png" style="width:22px;height:20px; position:absolute; left:160px; top:2px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
+          <div style="margin-top:5px;"><img  src="../assets/avatar.png"> </div>
           <div style="display:flex;flex-direction:column;margin-left: 10px;">
           <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
         </div>
-        <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" style="position:absolute; left:182px; top:0;">
+        <el-tabs v-model="activeTab" type="card" closable @tab-remove="removeTab" style="position:absolute; left:182px; top:0;">
           <el-tab-pane
             v-for="(item) in editableTabs"
             :key="item.name"
@@ -52,7 +52,8 @@
             <span style="font-size:36px;vertical-align:middle;display: table-cell;">{{headerText}}</span>
           </div>
           <el-main style="padding:0;">
-            <router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab"></router-view>
+            <!--router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab"></router-view-->
+            <div class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab" :is="activeTab" />
           </el-main>
         </div>
       </el-container>
@@ -62,6 +63,10 @@
 
 <script>
   import bus from "../utils/bus.js";
+  import  meetingcenter from '@/components/MeetingHome'
+  import  organize from '@/components/MeetingOrganize'
+  import  organizedetail from '@/components/MeetingOrganizeDetail'
+
   export default {
     data() {
       return {
@@ -70,22 +75,22 @@
         headerText: "会议中心",
         iscloseNav:  false,
         menvNavPanelWidth: "182px",
-
-          editableTabsValue: '2',
-          editableTabs: [{
-            title: 'Tab 1',
-            name: '1',
-            content: 'Tab 1 content'
-          }, {
-            title: 'Tab 2',
-            name: '2',
-            content: 'Tab 2 content'
-          }],
-          tabIndex: 2
+        activeTab: '',
+        editableTabs: []
       };
+    },
+    components: {
+      meetingcenter,
+      organize,
+      organizedetail
     },
     mounted() {
       // this.minimizeNav();
+        this.editableTabs.push({
+          title: '会议中心',
+          name: 'meetingcenter'
+        });
+        this.activeTab = 'meetingcenter';
     },
     methods: {
       set_bg_class(className) {
@@ -96,8 +101,18 @@
         console.log("[Home]set headerText to " + headerText);
         this.headerText = headerText;
       },
-      set_tab(idx) {
-
+      set_tab(tab) {
+        let existedTab = [...this.editableTabs].filter(e => e.name === tab.name);
+        if(!existedTab || existedTab.length === 0) {
+          console.log("* Adding the tab " + tab);
+          this.editableTabs.push({
+            title: tab.title,
+            name: tab.name
+          });
+        }
+        console.log("***************** hello3", this.editableTabs);
+        console.log("* Total tabs: " + this.editableTabs.length);
+        this.activeTab = tab.name;
       },
       minimizeNav() {
         this.iscloseNav = true;
@@ -114,18 +129,9 @@
           this.minimizeNav();
         }
       },
-      addTab(targetName) {
-        let newTabName = ++this.tabIndex + '';
-        this.editableTabs.push({
-          title: 'New Tab',
-          name: newTabName,
-          content: 'New Tab content'
-        });
-        this.editableTabsValue = newTabName;
-      },
       removeTab(targetName) {
         let tabs = this.editableTabs;
-        let activeName = this.editableTabsValue;
+        let activeName = this.activeTab;
         if (activeName === targetName) {
           tabs.forEach((tab, index) => {
             if (tab.name === targetName) {
@@ -136,8 +142,7 @@
             }
           });
         }
-        
-        this.editableTabsValue = activeName;
+        this.activeTab = activeName;
         this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       }
     }
@@ -165,6 +170,7 @@
 }
 
 .bg_content .content_size {
+  margin:auto;
   width: 100%;
   height: 100%;
   margin-left:52px;
