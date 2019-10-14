@@ -1,9 +1,8 @@
 <template>
   <div>
     <div>
-      <el-header height="85px" style="text-align:center;">
-        <img src="../assets/menu.png" style="width:30px;height:30px; position:absolute; left:182px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
-        <span style="font-size:36px;">{{headerText}}</span>
+      <el-header height="86px" style="text-align:center;">
+        <img src="../assets/menu.png" style="width:22px;height:20px; position:absolute; left:182px; top:2px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
         <div  style="display:flex; justify-content:center; position:absolute; left:0; top:0; height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
            <div style="margin-top:5px;"><img  src="../assets/avatar.png"> </div>
           <div style="display:flex;flex-direction:column;margin-left: 10px;">
@@ -13,7 +12,7 @@
         <!--div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
            <img  style="width: 50%; min-width: 30px; cursor:pointer;" src="../assets/menu.png" title="显示菜单面板" @click="expandNav">
           </div-->
-        <div class="clear"></div>
+          <div class="clear"></div>
       </el-header>
     </div>
  
@@ -39,10 +38,15 @@
           </div> 
       </el-aside>
   
-      <el-container>
-        <el-main style="padding:0;">
-          <router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header"></router-view>
-        </el-main>
+      <el-container style="overflow-y: auto;">
+        <div style="width:100%;">
+          <div style="text-align:center; height:85px; background: #6c8eb5; color:#ffffff; width:100%;display:table;">
+            <span style="font-size:36px;vertical-align:middle;display: table-cell;">{{headerText}}</span>
+          </div>
+          <el-main style="padding:0;">
+            <router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header"></router-view>
+          </el-main>
+        </div>
       </el-container>
     </el-container>
   </div>
@@ -118,7 +122,7 @@
 }
 
 .el-header {
-  background-color: #587a97;
+  background-color: #3f5d76;
   color: #ffffff;
   line-height: 85px;
 }

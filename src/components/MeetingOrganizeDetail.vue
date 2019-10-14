@@ -1,12 +1,12 @@
 <template>
     <div style="margin-left:52px; margin-right:52px;">
-        <el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
+        <!-- el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
             <el-breadcrumb-item :to="{ path: '/' }">会议中心</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
              <el-breadcrumb-item :to="{ path: '/organize/detail' }">详情信息展示</el-breadcrumb-item>
         </el-breadcrumb>
 
-        <el-divider></el-divider>
+        <el-divider></el-divider -->
 
         <div  class="clear clearfix" style="margin-top:20px;">
              <el-button type="text" class="button button-active">基本信息</el-button>
@@ -44,7 +44,7 @@
                 <span style="font-size:22px; color:#ffffff;">供应商推荐</span>
             </el-col>
         </el-row>
-        <el-row type="flex" >
+        <el-row type="flex" style="margin-bottom:0;" >
             <el-col :span="24">
                 <div id="supplierRecommendTable">
                     <el-table
@@ -110,7 +110,7 @@
         </el-row>
 
         <div style="float:right;">
-            <el-pagination layout="prev, next, total"  :page-size="10" :total="15">
+            <el-pagination layout="prev, next, total"  :page-size="pageSize" :total="totalSuppliers">
             </el-pagination>
         </div>
     </div>
@@ -119,7 +119,9 @@
 	export default{
 		data(){
 			 return {
-                suppliers: []
+                suppliers: [],
+                totalSuppliers: 0,
+                pageSize: 10
             }
         },
         methods: {
@@ -131,6 +133,7 @@
             (function(_this){
                 _this.$http.get(process.env.CONTEXT_PATH + "/static/JSON/supplier.json").then(function(response){
                     _this.suppliers = response.data;
+                    _this.totalSuppliers = _this.suppliers.length;
                 });
             })(this);
         },

@@ -41,7 +41,7 @@
                 </el-col>					
             </el-row>
 
-            <el-row type="flex" class="tablesection">
+            <el-row type="flex" class="tablesection" id="tablesection">
                 <el-col :span="24">
                     <el-card class="table-card" style="margin-right:22px;">
                         <div slot="header" class="clearfix">
@@ -235,7 +235,7 @@
 		}
 		.top-msg-region {
 			min-height:111px;
-			background: #505f67;
+	/*		background: #505f67; */
 			color:#ffffff;
 		}
 		.grid-content {
@@ -272,16 +272,19 @@
         }
         .tablesection {
             margin-top:60px;
-            height:calc(100vh - 600px);
+            height:calc(100vh - 685px);
         }
 </style>
 
 <style>
     #meetingHome {
-        height: calc(100vh - 196px);
+        height: calc(100vh - 286px);
     }
     #meetingHome  .el-table__body-wrapper {
         overflow-y: auto !important;
-        height:calc(100vh - 743px);
+        height:calc(100vh - 828px);
+    }
+    #tablesection .el-card__body {
+        padding-top:0 !important;
     }
 </style>

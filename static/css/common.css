@@ -217,11 +217,19 @@ body {
 
 .el-container {
   width: 100% !important;
-  height: calc(100vh - 83px) !important;
+  height: calc(100vh - 86px) !important;
 }
 
 .el-main {
   display: flex !important;
+}
+
+.el-row {
+  margin-bottom: 20px;
+}
+
+.el-col {
+  border-radius: 4px;
 }
 
 body {

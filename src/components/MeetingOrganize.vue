@@ -1,11 +1,11 @@
 <template>
     <div style="margin-left:52px; margin-right:52px;">
-        <el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
+        <!--el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
             <el-breadcrumb-item :to="{ path: '/home' }">会议中心</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
         </el-breadcrumb>
 
-        <el-divider></el-divider>
+        <el-divider></el-divider-->
 
         <div class="top-msg-region">
                 <span style="display: inline-block; ">会议编号：</span><span>S00000000000-{{selectedMeeting.meetingId}}</span>
