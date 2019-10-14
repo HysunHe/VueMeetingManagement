@@ -173,7 +173,7 @@
   margin:auto;
   width: 100%;
   height: 100%;
-  margin-left:52px;
+  margin-left:32px;
 }
 
 .el-header {
