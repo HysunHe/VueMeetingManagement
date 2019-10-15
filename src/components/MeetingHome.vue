@@ -293,6 +293,7 @@
     #meetingHome  .el-table__body-wrapper {
         overflow-y: auto !important;
         height:calc(100vh - 828px);
+        min-height: 220px;
     }
     #tablesection .el-card__body {
         padding-top:0 !important;
