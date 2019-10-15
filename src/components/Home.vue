@@ -163,18 +163,18 @@
   background-size: 100% 100%;
 }
 
-.bg_home .content_size {
-  margin:auto;
+.bg_home  .content_size {
+  /*margin:auto;*/
   height: 100%;
   width: fit-content;
   min-width: 1502px;
 }
 
-.bg_content .content_size {
+.bg_content  .content_size {
   margin:auto;
   width: 100%;
   height: 100%;
-  margin-left:32px;
+  margin-left:52px;
 }
 
 .el-header {
