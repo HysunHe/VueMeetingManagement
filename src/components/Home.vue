@@ -167,7 +167,7 @@
   /*margin:auto;*/
   height: 100%;
   width: fit-content;
-  min-width: 1502px;
+  min-width: 1560px;
 }
 
 .bg_content  .content_size {
