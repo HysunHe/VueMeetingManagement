@@ -83,11 +83,11 @@
     data() {
       return {
         userName: "Hysun",
-        bg_class: 'bg_home',
-        headerText: "会议中心",
+        bg_class: "bg_home",
+        headerText: "",
         iscloseNav:  false,
         menvNavPanelWidth: "182px",
-        activeTab: '',
+        activeTab: home,
         editableTabs: [],
         isHome: true
       };
@@ -98,10 +98,6 @@
         organize,
         organizedetail
     },
-    mounted() {
-      // this.minimizeNav();
-        this.activeTab = home;
-    },
     methods: {
       set_bg_class(className) {
         console.log("[Home]set bg_class to " + className);
@@ -110,18 +106,17 @@
       set_header(headerText) {
         console.log("[Home]set headerText to " + headerText);
         this.headerText = headerText;
+        this.isHome = false;
       },
       set_tab(tab) {
         let existedTab = [...this.editableTabs].filter(e => e.name === tab.name);
         if(!existedTab || existedTab.length === 0) {
-          console.log("* Adding the tab " + tab);
+          // console.log("* Adding the tab " + tab);
           this.editableTabs.push({
             title: tab.title,
             name: tab.name
           });
         }
-        console.log("***************** hello3", this.editableTabs);
-        console.log("* Total tabs: " + this.editableTabs.length);
         this.activeTab = tab.name;
       },
       minimizeNav() {
@@ -155,63 +150,66 @@
         this.activeTab = activeName;
         this.editableTabs = tabs.filter(tab => tab.name !== targetName);
         delete this.datacache[targetName];
+
+        if(this.editableTabs.length === 0) {
+          this.isHome = true;
+          this.activeTab = home;
+        }
       }
     }
   };
 </script>
 
 <style scoped>
-/* @import "../../static/css/index.css"; */
+  .bg_home {
+    background: url("../../static/img/bg_home.png") no-repeat;  
+    background-size: 100% 100%;
+  }
 
-.bg_home {
-  background: url("../../static/img/bg_home.png") no-repeat;  
-  background-size: 100% 100%;
-}
+  .bg_content {
+    background: url("../../static/img/bg-content.png") no-repeat;  
+    background-size: 100% 100%;
+  }
 
-.bg_content {
-  background: url("../../static/img/bg-content.png") no-repeat;  
-  background-size: 100% 100%;
-}
+  .bg_home  .content_size {
+    /*margin:auto;*/
+    height: 100%;
+    width: fit-content;
+    min-width: 1560px;
+  }
 
-.bg_home  .content_size {
-  /*margin:auto;*/
-  height: 100%;
-  width: fit-content;
-  min-width: 1560px;
-}
+  .bg_content  .content_size {
+    margin:auto;
+    width: 100%;
+    height: 100%;
+    margin-left:52px;
+  }
 
-.bg_content  .content_size {
-  margin:auto;
-  width: 100%;
-  height: 100%;
-  margin-left:52px;
-}
+  .el-header {
+    background-color: #3f5d76;
+    color: #ffffff;
+    line-height: 85px;
+  }
 
-.el-header {
-  background-color: #3f5d76;
-  color: #ffffff;
-  line-height: 85px;
-}
+  .el-menu--popup {
+    background-color: #16181d;
+  }
 
-.el-menu--popup {
-  background-color: #16181d;
-}
+  .menu-button {
+    color:white;
+    text-align: center;
+    margin:0;
+    border-bottom: 1px solid #091c30;
+    width:100%;
+    height:120px;
+  }
 
-.menu-button {
-  color:white;
-  text-align: center;
-  margin:0;
-  border-bottom: 1px solid #091c30;
-  width:100%;
-  height:120px;
-}
-
-.menu-button-small {
-  color:white;
-  text-align: center;
-  margin:0;
-  border-bottom: 1px solid #091c30;
-  width:100%;
-  height:68px;
-}
+  .menu-button-small {
+    color:white;
+    text-align: center;
+    margin:0;
+    border-bottom: 1px solid #091c30;
+    width:100%;
+    height:68px;
+  }
 </style>

@@ -12,5 +12,9 @@
     "icon":"/static/img/ht.png"
  },{
     "name":"会议中心",
-    "icon":"/static/img/hyzx.png"
+    "icon":"/static/img/hyzx.png",
+    "header": "会议中心",
+    "bgclz": "bg_home",
+    "tabtitle": "会议中心",
+    "tabname": "meetingcenter"
  }]

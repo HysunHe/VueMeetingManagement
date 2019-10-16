@@ -2,13 +2,13 @@
 	<div id="homepage" style="min-width:1588px;">
         <div  class="card-button-section">
             <div class="card-button" v-for="(item,i) in shortlist" :key="item.name">
-                <span style="cursor:pointer;">
+                <span style="cursor:pointer;" @click="go(item)">
                     <img  style="padding-top:25px;" :src="item.icon">
                     <span style="display:block; ">{{item.name}}</span>
                 </span>
             </div>
             <div class="card-button">
-                <span style="cursor:pointer;">
+                <span style="cursor:pointer;" @click="add">
                     <img  style="padding-top:25px;" src="../../static/img/tj.png">
                     <span style="display:block; ">添加快捷键</span>
                 </span>
@@ -199,6 +199,30 @@
         methods: {
             headerCcell(row){ 
                 return "font-weight:bold; color:#333333; ";
+            },
+            go(item) {
+                let headertext = item.header, bghome = item.bgclz, 
+                        tabtitle = item.tabtitle, tabname = item.tabname;
+                if(headertext && bghome && tabtitle && tabname) {
+                    this.$emit('set_header_text', headertext);
+                    this.$emit('set_bg_class', bghome);
+                    this.$emit('set_tab', {
+                        title: tabtitle,
+                        name: tabname
+                    });
+                } else {
+                    console.log("*Destination is not set.");
+                    this.$message({
+                        type: 'info',
+                        message: `您正在点击 ${item.name}`
+                    });
+                }
+            },
+            add() {
+                this.$message({
+                    type: 'info',
+                    message: `添加快捷操作`
+                });
             }
         },
         created() {
