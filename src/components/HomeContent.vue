@@ -48,15 +48,15 @@
                             <template slot-scope="scope">
                                 <div style="display:flex;flex-direction: row;align-items:center; ">
                                     <span :class="scope.row.state===0 ? 'statetext-now' : scope.row.state>0 ? 'statetext-passed' : 'statetext'">指标公告</span>
-                                    <img  class="statearrow" :src="scope.row.state>=1 ? '../../static/img/ljt.png': '../../static/img/hjt.png'">
+                                    <img  class="statearrow" :src="scope.row.state>=1 ? './static/img/ljt.png': './static/img/hjt.png'">
                                     <span :class="scope.row.state===1 ? 'statetext-now' : scope.row.state>1 ? 'statetext-passed' : 'statetext'">招标文件</span>
-                                    <img  class="statearrow" :src="scope.row.state>=2 ? '../../static/img/ljt.png': '../../static/img/hjt.png'">
+                                    <img  class="statearrow" :src="scope.row.state>=2 ? './static/img/ljt.png': './static/img/hjt.png'">
                                     <span :class="scope.row.state===2 ? 'statetext-now' : scope.row.state>2 ? 'statetext-passed' : 'statetext'">开标</span>
-                                    <img  class="statearrow" :src="scope.row.state>=3 ? '../../static/img/ljt.png': '../../static/img/hjt.png'">
+                                    <img  class="statearrow" :src="scope.row.state>=3 ? './static/img/ljt.png': './static/img/hjt.png'">
                                     <span :class="scope.row.state===3 ? 'statetext-now' : scope.row.state>3 ? 'statetext-passed' : 'statetext'">评标</span>
-                                    <img  class="statearrow" :src="scope.row.state>=4 ? '../../static/img/ljt.png': '../../static/img/hjt.png'">
+                                    <img  class="statearrow" :src="scope.row.state>=4 ? './static/img/ljt.png': './static/img/hjt.png'">
                                     <span :class="scope.row.state===4 ? 'statetext-now' : scope.row.state>4 ? 'statetext-passed' : 'statetext'">候选人公示</span>
-                                    <img  class="statearrow" :src="scope.row.state>=5 ? '../../static/img/ljt.png': '../../static/img/hjt.png'">
+                                    <img  class="statearrow" :src="scope.row.state>=5 ? './static/img/ljt.png': './static/img/hjt.png'">
                                     <span :class="scope.row.state===5 ? 'statetext-now' : scope.row.state>5 ? 'statetext-passed' : 'statetext'">结果通知</span>
                                 </div>
                             </template>
