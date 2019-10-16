@@ -1,0 +1,16 @@
+[{
+    "name":"材料组管理",
+    "icon":"/static/img/clz.png"
+ },{
+    "name":"供应商信息",
+    "icon":"/static/img/gys.png"
+ },{
+    "name":"方案制作",
+    "icon":"/static/img/fazz.png"
+ },{
+    "name":"合同管理",
+    "icon":"/static/img/ht.png"
+ },{
+    "name":"会议中心",
+    "icon":"/static/img/hyzx.png"
+ }]

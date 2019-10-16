@@ -13,9 +13,9 @@
 		</div>
 
         <div  class="clear clearfix" style="margin-top:74px;">
-             <el-button style="float:left;" type="text" class="button" @click="openDialog"><img  class="button_img_size" src="../assets/add.png"> 添加</el-button>
-            <el-button style="float:left; margin-left:26px;"  type="text" class="button"><img  class="button_img_size" src="../assets/add.png"> 结束</el-button>
-            <el-button  style="float:right;" type="text" class="button" @click="selectMeeting"><img  class="button_img_size" src="../assets/add.png"> 会议选择</el-button>
+             <el-button style="float:left;" type="text" class="button" @click="openDialog"><img  class="button_img_size" src="../../static/img/add.png"> 添加</el-button>
+            <el-button style="float:left; margin-left:26px;"  type="text" class="button"><img  class="button_img_size" src="../../static/img/add.png"> 结束</el-button>
+            <el-button  style="float:right;" type="text" class="button" @click="selectMeeting"><img  class="button_img_size" src="../../static/img/add.png"> 会议选择</el-button>
             <el-select  id="sel_meeting" ref="sel_meeting" style="float:right; " v-if="showMeetingSelBox" v-model="selectedMeeting" value-key="meetingId"  
                                  @change="onMeetingSelect" filterable placeholder="请选择">
                 <el-option

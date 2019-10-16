@@ -1,6 +1,17 @@
 <template>
   <div>
     <div>
+      <el-header v-if="isHome" height="86px" style="text-align:center;background:#6c8eb5;">
+        <div style="text-align:center; 100%; width:100%;display:table;">
+            <span style="font-size:36px;color:#ffffff;vertical-align:middle;display: table-cell;">首页</span>
+        </div>
+        <div  style="display:table; justify-content:center; position:absolute; left:0; top:0; height: 86px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
+            <span style="vertical-align:middle;display: table-cell;"> <img src="../../static/img/menu.png" style="width:45px;height:45px; cursor:pointer;" title="菜单开关"  @click="toggleNav"></span>
+        </div>
+        <div style="position:absolute; right:0;top:0;display:table; ">
+            <span style="vertical-align:middle;display: table-cell;"><img src="../../static/img/gys.png" style="width:30px;height:30px; cursor:pointer; margin-top: 28px;margin-right: 25px;"></span>
+        </div>
+      </el-header>
       <el-header v-if="!isHome" height="86px" style="text-align:center;">
         <div  style="display:flex; justify-content:center; position:absolute; left:0; top:0; height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
             <img src="../../static/img/menu.png" style="width:22px;height:20px; position:absolute; left:160px; top:2px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
@@ -48,7 +59,7 @@
   
       <el-container style="overflow-y: auto;">
         <div style="width:100%;">
-          <div style="text-align:center; height:85px; background: #6c8eb5; color:#ffffff; width:100%;display:table;">
+          <div v-if="!isHome" style="text-align:center; height:85px; background: #6c8eb5; color:#ffffff; width:100%;display:table;">
             <span style="font-size:36px;vertical-align:middle;display: table-cell;">{{headerText}}</span>
           </div>
           <el-main style="padding:0;">
@@ -63,6 +74,7 @@
 
 <script>
   import bus from "../utils/bus.js";
+  import  home from '@/components/HomeContent'
   import  meetingcenter from '@/components/MeetingHome'
   import  organize from '@/components/MeetingOrganize'
   import  organizedetail from '@/components/MeetingOrganizeDetail'
@@ -76,21 +88,19 @@
         iscloseNav:  false,
         menvNavPanelWidth: "182px",
         activeTab: '',
-        editableTabs: []
+        editableTabs: [],
+        isHome: true
       };
     },
     components: {
-      meetingcenter,
-      organize,
-      organizedetail
+        home,
+        meetingcenter,
+        organize,
+        organizedetail
     },
     mounted() {
       // this.minimizeNav();
-        this.editableTabs.push({
-          title: '会议中心',
-          name: 'meetingcenter'
-        });
-        this.activeTab = 'meetingcenter';
+        this.activeTab = home;
     },
     methods: {
       set_bg_class(className) {

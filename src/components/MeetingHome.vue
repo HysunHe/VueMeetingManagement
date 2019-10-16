@@ -17,7 +17,7 @@
                     <el-card class="box-card">
                         <div class="menu-button">
                             <span style="cursor:pointer;">
-                                <img  style="padding-top:25px;" src="../assets/mc.png">
+                                <img  style="padding-top:25px;" src="../../static/img/mc.png">
                                 <span style="display:block; ">会议创建</span>
                             </span>
                         </div>
@@ -25,7 +25,7 @@
                     <el-card class="box-card" style="margin-left:86px;">
                         <div class="menu-button">
                             <span style="cursor:pointer;" @click="go_meeting_organize()">
-                                <img  style="padding-top:25px;" src="../assets/mo.png">
+                                <img  style="padding-top:25px;" src="../../static/img/mo.png">
                                 <span style="display:block; ">会议组织</span>
                             </span>
                         </div>
@@ -33,7 +33,7 @@
                     <el-card class="box-card" style="margin-left:86px;">
                         <div class="menu-button">
                             <span style="cursor:pointer;">
-                                <img  style="padding-top:25px;" src="../assets/mq.png">
+                                <img  style="padding-top:25px;" src="../../static/img/mq.png">
                                 <span style="display:block; ">会议查询</span>
                             </span>
                         </div>
