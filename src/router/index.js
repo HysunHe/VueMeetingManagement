@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import home from '@/components/Home.vue'
+import MeetingCenter from '@/components/MeetingCenter.vue'
 import  MeetingHome from '@/components/MeetingHome'
 import  MeetingOrganize from '@/components/MeetingOrganize'
 //import  MeetingOrganizeDetail from '@/components/MeetingOrganizeDetail'
@@ -15,10 +15,10 @@ export default new Router({
     {
       path: '/',
       name: '会议中心',
-      component: home,
-      redirect: '/home',
+      component: MeetingCenter,
+      redirect: '/meetingcenter',
       children: [
-        { path: '/home', component: MeetingHome, name: '我的任务' },
+        { path: '/meetingcenter', component: MeetingHome, name: '会议中心' },
         { path: '/organize', component: MeetingOrganize, name: '会议组织' },
         { path: '/organize/detail', component: MeetingOrganizeDetail, name: '详情信息展示' }
       ]
