@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100%;">
     <div>
       <el-header v-if="isHome" height="86px" style="text-align:center;background:#6c8eb5;">
         <div style="text-align:center; 100%; width:100%;display:table;">
@@ -89,7 +89,8 @@
         menvNavPanelWidth: "182px",
         activeTab: home,
         editableTabs: [],
-        isHome: true
+        isHome: true,
+        isResizing: false
       };
     },
     components: {
@@ -98,7 +99,25 @@
         organize,
         organizedetail
     },
+    mounted() {
+      this.zoom(document.body.clientWidth);
+      window.onresize = () => {
+        if(!this.isResizing) {
+          // this.zoom(document.body.clientWidth);
+        }
+      };
+    },
     methods: {
+      zoom(w) {
+        if(w <= 1000) {
+          return;
+        } else {
+          setTimeout(() => {
+            document.getElementsByTagName('body')[0].style.zoom=(w-182 - 26 - 26)/1588;
+            this.isResizing = false;
+          }, 100);
+        }
+      },
       set_bg_class(className) {
         console.log("[Home]set bg_class to " + className);
         this.bg_class = className;
@@ -164,6 +183,7 @@
   .bg_home {
     background: url("../../static/img/bg_home.png") no-repeat;  
     background-size: 100% 100%;
+    height:100% !important;
   }
 
   .bg_content {
@@ -174,7 +194,6 @@
   .bg_home  .content_size {
     /*margin:auto;*/
     height: 100%;
-    width: fit-content;
     min-width: 1560px;
   }
 

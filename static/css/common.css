@@ -217,7 +217,7 @@ body {
 
 .el-container {
   width: 100% !important;
-  height: calc(100vh - 86px) !important;
+  height: calc(100% - 86px) !important;
 }
 
 .el-main {

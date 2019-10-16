@@ -282,18 +282,19 @@
         }
         .tablesection {
             margin-top:60px;
-            height:calc(100vh - 685px);
+            /*height:calc(100vh - 685px);*/
         }
 </style>
 
 <style>
     #meetingHome {
-        height: calc(100vh - 286px);
+        /*height: calc(100vh - 286px);*/
     }
     #meetingHome  .el-table__body-wrapper {
         overflow-y: auto !important;
-        height:calc(100vh - 828px);
-        min-height: 220px;
+        /*height:calc(100vh - 828px);*/
+        /*min-height: 220px;*/
+        height: 300px;
     }
     #tablesection .el-card__body {
         padding-top:0 !important;

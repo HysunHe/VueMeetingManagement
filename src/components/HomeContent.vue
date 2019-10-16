@@ -1,5 +1,5 @@
 <template>
-	<div id="homepage" style="min-width:1588px;">
+	<div id="homepage" style="width:1588px;">
         <div  class="card-button-section">
             <div class="card-button" v-for="(item,i) in shortlist" :key="item.name">
                 <span style="cursor:pointer;" @click="go(item)">
@@ -309,9 +309,8 @@
             padding-right:10px;
         }
         .card-button-section {
-            margin:26px 0 26px 26px; 
+            margin:0 0 26px 26px; 
             display:flex;
-            flex-wrap: wrap;
         }
         .card-button {
             color:#333333;
@@ -321,6 +320,7 @@
             margin:0 26px 0 0;
             width:234px;
             height:168px;
+            margin-top:26px;
         }
         .button {
             padding: 0;
