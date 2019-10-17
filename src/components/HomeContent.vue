@@ -1,6 +1,6 @@
 <template>
 	<div id="homepage" style="width:1588px;">
-        <div  class="card-button-section">
+        <div style="width:100%"  class="card-button-section">
             <div class="card-button" v-for="(item,i) in shortlist" :key="item.name">
                 <span style="cursor:pointer;" @click="go(item)">
                     <img  style="padding-top:25px;" :src="item.icon">
@@ -15,8 +15,8 @@
             </div>
         </div>
 
-        <div style="margin-left:26px; margin-top:26px;">
-            <el-card class="tablefull-card" style="margin-right:22px;">
+        <div class="homepanel">
+            <el-card class="tablefull-card2">
                 <div slot="header" class="clearfix">
                     <span style="font-size:20px; color:#333333; font-weight:600;">采购申请状态跟踪卡</span>
                 </div>
@@ -44,7 +44,7 @@
                         <el-table-column
                             prop="state"
                             label="状态跟踪"
-                            min-width="260">
+                            width="700">
                             <template slot-scope="scope">
                                 <div style="display:flex;flex-direction: row;align-items:center; ">
                                     <span :class="scope.row.state===0 ? 'statetext-now' : scope.row.state>0 ? 'statetext-passed' : 'statetext'">指标公告</span>
@@ -66,8 +66,8 @@
             </el-card>
         </div>
 
-        <div id="statustrack" style="margin-left:26px; margin-top:26px;">
-            <el-card class="tablefull-card" style="margin-right:22px;">
+        <div id="statustrack" class="homepanel">
+            <el-card class="tablefull-card">
                 <div slot="header" class="clearfix">
                     <span style="font-size:20px; color:#333333; font-weight:600;">采购申请状态汇总卡</span>
                 </div>
@@ -115,8 +115,8 @@
             </el-card>
         </div>
 
-        <div style="margin-left:26px; margin-top:26px;">
-            <el-card class="table-card" style="margin-right:22px;">
+        <div class="homepanel" style="display:flex; flex-wrap:nowrap;">
+            <el-card class="table-card" style="margin-right:18px;">
                 <div slot="header" class="clearfix">
                     <span style="font-size:20px; color:#333333; font-weight:600;">待办事项</span>
                     <el-button type="text" class="button"> 更多 <img style="width:18px; height:15px;" src="../../static/img/sjt.png"></el-button>
@@ -251,8 +251,15 @@
             border-color: #4f718a;
             overflow: scroll;
         }
+		.tablefull-card2 {
+            width:calc(100% - 29px);
+            display: inline-table;
+            border: 1px solid;
+            border-color: #4f718a;
+            overflow: scroll;
+		}
 		.tablefull-card {
-            width:calc(100% - 26px);
+            width:calc(100% - 27px);
             display: inline-table;
             border: 1px solid;
             border-color: #4f718a;
@@ -308,6 +315,7 @@
         .card-button-section {
             margin:0 0 26px 26px; 
             display:flex;
+            width: 100%;
         }
         .card-button {
             color:#333333;
@@ -333,6 +341,11 @@
         }
         .clearfix:after {
             clear: both
+        }
+        .homepanel {  
+            margin-left:26px; 
+            margin-top:26px;
+            width: 1560px;
         }
 </style>
 

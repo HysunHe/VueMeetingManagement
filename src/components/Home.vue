@@ -84,7 +84,11 @@
         activeTab: home,
         editableTabs: [],
         isHome: true,
-        isResizing: false
+        zoom: {
+          r: 0,
+          lw: 0,
+          isResizing: false
+        }
       };
     },
     components: {
@@ -94,25 +98,48 @@
         organizedetail
     },
     mounted() {
-      let lastZoom = 1;
-      // this.zoom(document.body.clientWidth);
+      let _this = this;
+      const cw = 1588;
+      let winSize = document.body.clientWidth;
+      let diff = 90;
+      if(winSize > 1000) {
+        diff = winSize > (cw + 240) ? 110 + (winSize - 1000) / cw * 168 : 168;
+      }
+      let z = (winSize - diff)/cw;
+      _this.zoom.r = 1 - z;
+      document.getElementsByTagName('body')[0].style.zoom=z;
+      _this.zoom.lw = document.body.clientWidth;
       window.onresize = () => {
-        if(!this.isResizing) {
-          // this.zoom(document.body.clientWidth);
+        if(!_this.zoom.isResizing) {
+          _this.zoom.isResizing = true;
+          setTimeout(() => {
+            winSize = document.body.clientWidth;
+            diff = 90
+            if(winSize > 1000) {
+              diff = winSize > _this.zoom.lw ? 100 + (winSize - 1000) / cw * 168 : 168 * (_this.zoom.lw/winSize);  
+            }
+            if(winSize * (1 - _this.zoom.r) <= cw) {
+              if(winSize * (1 - _this.zoom.r) > 1000) {
+                diff -= 128;
+              } else {
+                diff -= 150;
+              }
+            }
+            if(winSize * (1 - _this.zoom.r)  < cw) {
+              _this.minimizeNav();
+            } else {
+              _this.expandNav();
+            }
+            z = (winSize * (1 - _this.zoom.r) - diff)/cw;
+            _this.zoom.r = 1 - z;
+            document.getElementsByTagName('body')[0].style.zoom=z
+            _this.zoom.lw = document.body.clientWidth;
+            _this.zoom.isResizing = false;
+          }, 300);
         }
       };
     },
     methods: {
-      zoom(w, r) {
-        if(w <= 1000) {
-          return;
-        } else {
-          setTimeout(() => {
-            document.getElementsByTagName('body')[0].style.zoom=(w-182 - 26 - 26)/1588;
-            this.isResizing = false;
-          }, 100);
-        }
-      },
       set_bg_class(className) {
         console.log("[Home]set bg_class to " + className);
         this.bg_class = className;
@@ -190,7 +217,7 @@
     /*margin:auto;*/
     height: 100%;
     width: 100%;
-    min-width: 1560px;
+    width: 1560px;
   }
 
   .bg_content  .content_size {
