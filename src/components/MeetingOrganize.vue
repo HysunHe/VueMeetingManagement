@@ -1,10 +1,9 @@
 <template>
-    <div style="margin-left:52px; margin-right:52px;">
+    <div style="margin-left:40px; margin-right:40px;">
         <!--el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
             <el-breadcrumb-item :to="{ path: '/home' }">会议中心</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
         </el-breadcrumb>
-
         <el-divider></el-divider-->
 
         <div class="top-msg-region">
@@ -15,7 +14,7 @@
         <div  class="clear clearfix" style="margin-top:74px;">
              <el-button style="float:left;" type="text" class="button" @click="openDialog"><img  class="button_img_size" src="../../static/img/add.png"> 添加</el-button>
             <el-button style="float:left; margin-left:26px;"  type="text" class="button"><img  class="button_img_size" src="../../static/img/add.png"> 结束</el-button>
-            <el-button  style="float:right;" type="text" class="button" @click="selectMeeting"><img  class="button_img_size" src="../../static/img/add.png"> 会议选择</el-button>
+            <el-button  style="float:right; margin-right:80px;" type="text" class="button" @click="selectMeeting"><img  class="button_img_size" src="../../static/img/add.png"> 会议选择</el-button>
             <el-select  id="sel_meeting" ref="sel_meeting" style="float:right; " v-if="showMeetingSelBox" v-model="selectedMeeting" value-key="meetingId"  
                                  @change="onMeetingSelect" filterable placeholder="请选择">
                 <el-option
@@ -108,7 +107,7 @@
             </div>
         </el-dialog>
 
-        <div id="topicsTable" style="margin-top:14px;">
+        <div id="topicsTable" style="margin-top:14px; margin-right:80px;">
             <el-table
                 :data="meetingTopics"
                 stripe
@@ -153,7 +152,7 @@
             </el-table>
         </div>
 
-        <div style="float:right;">
+        <div style="float:right; margin-right: 80px;">
             <el-pagination layout="prev, next, total"  :page-size="20" :total="totalTopics">
             </el-pagination>
         </div>
@@ -202,8 +201,12 @@
                     _this.selectedMeeting = bus.meeting_list[0];
                     _this.loadTopics(_this);
                 } else {
-                    _this.$router.push({
-                        path: "/home"
+                    // _this.$router.push({
+                    //     path: "/home"
+                    // });
+                    this.$emit('set_tab', {
+                        title: '首页',
+                        name: 'home'
                     });
                 }
             })(this);
@@ -350,14 +353,6 @@
         height:62px;
         font-size:20px;
         color: #0c7df0;
-    }
-    .clearfix:before,
-    .clearfix:after {
-        display: table;
-        content: "";
-    }
-    .clearfix:after {
-        clear: both
     }
 </style>
 <style>

@@ -201,11 +201,8 @@
                 return "font-weight:bold; color:#333333; ";
             },
             go(item) {
-                let headertext = item.header, bghome = item.bgclz, 
-                        tabtitle = item.tabtitle, tabname = item.tabname;
-                if(headertext && bghome && tabtitle && tabname) {
-                    this.$emit('set_header_text', headertext);
-                    this.$emit('set_bg_class', bghome);
+                let tabtitle = item.tabtitle, tabname = item.tabname;
+                if(tabtitle && tabname) {
                     this.$emit('set_tab', {
                         title: tabtitle,
                         name: tabname

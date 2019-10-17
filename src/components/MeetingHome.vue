@@ -12,109 +12,105 @@
 		</div>
 
         <div id="meetingHome" style="margin-left:52px;" >
-            <el-row type="flex" :gutter="50">
-                <el-col :span="24">
-                    <el-card class="box-card">
-                        <div class="menu-button">
-                            <span style="cursor:pointer;">
-                                <img  style="padding-top:25px;" src="../../static/img/mc.png">
-                                <span style="display:block; ">会议创建</span>
-                            </span>
-                        </div>
-                    </el-card>
-                    <el-card class="box-card" style="margin-left:86px;">
-                        <div class="menu-button">
-                            <span style="cursor:pointer;" @click="go_meeting_organize()">
-                                <img  style="padding-top:25px;" src="../../static/img/mo.png">
-                                <span style="display:block; ">会议组织</span>
-                            </span>
-                        </div>
-                    </el-card>
-                    <el-card class="box-card" style="margin-left:86px;">
-                        <div class="menu-button">
-                            <span style="cursor:pointer;">
-                                <img  style="padding-top:25px;" src="../../static/img/mq.png">
-                                <span style="display:block; ">会议查询</span>
-                            </span>
-                        </div>
-                    </el-card>
-                </el-col>					
-            </el-row>
+            <div style="display:flex; flex-wrap: nowrap;">
+                <el-card class="box-card">
+                    <div class="menu-button">
+                        <span style="cursor:pointer;">
+                            <img  style="padding-top:25px;" src="../../static/img/mc.png">
+                            <span style="display:block; ">会议创建</span>
+                        </span>
+                    </div>
+                </el-card>
+                <el-card class="box-card" style="margin-left:86px;">
+                    <div class="menu-button">
+                        <span style="cursor:pointer;" @click="go_meeting_organize()">
+                            <img  style="padding-top:25px;" src="../../static/img/mo.png">
+                            <span style="display:block; ">会议组织</span>
+                        </span>
+                    </div>
+                </el-card>
+                <el-card class="box-card" style="margin-left:86px;">
+                    <div class="menu-button">
+                        <span style="cursor:pointer;">
+                            <img  style="padding-top:25px;" src="../../static/img/mq.png">
+                            <span style="display:block; ">会议查询</span>
+                        </span>
+                    </div>
+                </el-card>
+            </div>
 
-            <el-row type="flex" class="tablesection" id="tablesection">
-                <el-col :span="24">
-                    <el-card class="table-card" style="margin-right:22px;">
-                        <div slot="header" class="clearfix">
-                            <span style="font-size:24px; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">{{totalMeetings}}</span>会议申请等待安排）</span>
-                        </div>
-                        <div>
-                            <el-table
-                                :data="meetingList"
-                                stripe
-                                :header-cell-style="headerCcell"
-                                style="width: 100%; font-size:18px; color:#333333;">
-                                <el-table-column
-                                    prop="meetingName"
-                                    label="方案名称"
-                                    min-width="200">
-                                </el-table-column>
-                                <el-table-column
-                                    prop="owner.name"
-                                    label="申请人"
-                                    min-width="180">
-                                </el-table-column>
-                                <el-table-column
-                                    prop="meetingTime"
-                                    label="申请时间"
-                                    :formatter="truncDatetime2Mins"
-                                    min-width="180">
-                                </el-table-column>
-                            </el-table>
-                        </div>
-                        <!--div class="bottom clearfix">
-                            <el-button type="text" class="button" @click="showAllMeetingList()">查看申请列表</el-button>
-                        </div-->
-                    </el-card>
-                   <el-card class="table-card" style="margin-left:22px;">
-                        <div slot="header" class="clearfix">
-                            <span style="font-size:24px; color:#333333; font-weight:600;">会议安排（当前有<span style="color:#ff200f;">{{totalTopics}}</span>会议申请等待安排）</span>
-                        </div>
-                        <div>
-                            <el-table
-                                :data="topicList"
-                                stripe
-                                :header-cell-style="headerCcell"
-                                style="width: 100%; font-size:18px; color:#333333;">
-                                <el-table-column
-                                    prop="topicName"
-                                    label="会议议题"
-                                    min-width="200">
-                                </el-table-column>
-                                <el-table-column
-                                    prop="applyTime"
-                                    label="日期"
-                                    :formatter="truncDate"
-                                    min-width="180">
-                                </el-table-column>
-                                <el-table-column
-                                    prop="applyTime"
-                                    label="时间"
-                                    :formatter="truncTime"
-                                    min-width="90">
-                                </el-table-column>
-                                <el-table-column
-                                    prop="topicMaxDuration"
-                                    label="时长"
-                                    min-width="130">
-                                </el-table-column>
-                            </el-table>
-                        </div>
-                        <!--div class="bottom clearfix">
-                            <el-button type="text" class="button" @click="showAllTopicList()">查看申请列表</el-button>
-                        </div-->
-                    </el-card>
-                </el-col>			
-            </el-row>
+            <div id="tablesection" class="tablesection" style="display:flex; flex-wrap: nowrap;">
+                <el-card class="table-card" style="margin-right:22px;">
+                    <div slot="header" class="clearfix">
+                        <span style="font-size:24px; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">{{totalMeetings}}</span>会议申请等待安排）</span>
+                    </div>
+                    <div>
+                        <el-table
+                            :data="meetingList"
+                            stripe
+                            :header-cell-style="headerCcell"
+                            style="width: 100%; font-size:18px; color:#333333;">
+                            <el-table-column
+                                prop="meetingName"
+                                label="方案名称"
+                                min-width="200">
+                            </el-table-column>
+                            <el-table-column
+                                prop="owner.name"
+                                label="申请人"
+                                min-width="180">
+                            </el-table-column>
+                            <el-table-column
+                                prop="meetingTime"
+                                label="申请时间"
+                                :formatter="truncDatetime2Mins"
+                                min-width="180">
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                    <!--div class="bottom clearfix">
+                        <el-button type="text" class="button" @click="showAllMeetingList()">查看申请列表</el-button>
+                    </div-->
+                </el-card>
+                <el-card class="table-card" style="margin-left:22px;">
+                    <div slot="header" class="clearfix">
+                        <span style="font-size:24px; color:#333333; font-weight:600;">会议安排（当前有<span style="color:#ff200f;">{{totalTopics}}</span>会议申请等待安排）</span>
+                    </div>
+                    <div>
+                        <el-table
+                            :data="topicList"
+                            stripe
+                            :header-cell-style="headerCcell"
+                            style="width: 100%; font-size:18px; color:#333333;">
+                            <el-table-column
+                                prop="topicName"
+                                label="会议议题"
+                                min-width="200">
+                            </el-table-column>
+                            <el-table-column
+                                prop="applyTime"
+                                label="日期"
+                                :formatter="truncDate"
+                                min-width="180">
+                            </el-table-column>
+                            <el-table-column
+                                prop="applyTime"
+                                label="时间"
+                                :formatter="truncTime"
+                                min-width="90">
+                            </el-table-column>
+                            <el-table-column
+                                prop="topicMaxDuration"
+                                label="时长"
+                                min-width="130">
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                    <!--div class="bottom clearfix">
+                        <el-button type="text" class="button" @click="showAllTopicList()">查看申请列表</el-button>
+                    </div-->
+                </el-card>
+            </div>
         </div>
 	</div>
 </template>
@@ -129,10 +125,14 @@
                 totalTopics: 0
             }
         },
+        mounted() {
+            this.$emit('set_header_text', '会议中心');
+            this.$emit('set_bg_class', 'bg_home');
+        },
         methods: {
             go_meeting_organize(){
-                this.$emit('set_header_text', '会议组织');
-                this.$emit('set_bg_class', 'bg_content');
+                // this.$emit('set_header_text', '会议组织');
+                // this.$emit('set_bg_class', 'bg_content');
                 // this.$router.push({
                 //   path: "/organize"
                 // });
@@ -203,21 +203,6 @@
                     _this.totalTopics = bus.topic_list.length;
                 });
             })(this);
-        },
-        mounted() {
-            // Dynamic header text & background image.
-            (function(_this){
-                if(_this.$route.path === '/home') {
-                    _this.$emit('set_header_text', '会议中心');
-                    _this.$emit('set_bg_class', 'bg_home');
-                } else if(_this.$route.path === '/organize') {
-                    _this.$emit('set_header_text', '会议组织');
-                    _this.$emit('set_bg_class', 'bg_content');
-                } else if(_this.$route.path === '/organize/detail') {
-                    _this.$emit('set_header_text', '详情信息展示');
-                    _this.$emit('set_bg_class', 'bg_content');
-                }
-             })(this);
         }
 	}
 </script>
@@ -229,10 +214,11 @@
 		}
 		.table-card {
             width:723px;
+            height:476px;
             display: inline-table;
             border: 1px solid;
             border-color: #4f718a;
-            overflow: scroll;
+            overflow-y: auto;
 		}
 		.el-row {
 			margin-bottom: 30px;
@@ -293,8 +279,8 @@
     #meetingHome  .el-table__body-wrapper {
         overflow-y: auto !important;
         /*height:calc(100vh - 828px);*/
-        /*min-height: 220px;*/
-        height: 300px;
+        min-height: 220px;
+        max-height: 328px;
     }
     #tablesection .el-card__body {
         padding-top:0 !important;

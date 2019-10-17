@@ -8,15 +8,9 @@ import Home from '@/components/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'JESP',
-      component: Home,
-      redirect: '/home',
-      children: [
-        { path: '/home', component: Home, name: '首页' }
-      ]
-    }
-  ]
-})
+  routes: [{
+    path: '/',
+    name: 'JESP',
+    component: Home
+  }]
+});
