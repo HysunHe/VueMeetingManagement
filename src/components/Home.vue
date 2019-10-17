@@ -4,21 +4,21 @@
       <div style="text-align:center; 100%; width:100%;display:table;">
           <span style="font-size:36px;color:#ffffff;vertical-align:middle;display: table-cell;">首页</span>
       </div>
-      <div  style="display:table; justify-content:center; position:absolute; left:0; top:0; height: 86px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
-          <span style="vertical-align:middle;display: table-cell;"> <img src="../../static/img/menu.png" style="width: 50%; min-width: 30px; cursor:pointer;" title="菜单开关"  @click="toggleNav"></span>
+      <div  class="menu-toggle" :style = "iscloseNav ? 'width:60px' : 'width:182px'">
+          <span style="vertical-align:middle;display: table-cell;"> <img src="../../static/img/menu.png" :style = "iscloseNav ? 'width:33px; cursor:pointer;' : 'width:45px; cursor:pointer;'" title="菜单开关"  @click="toggleNav"></span>
       </div>
       <div style="position:absolute; right:0;top:0;display:table; ">
           <span style="vertical-align:middle;display: table-cell;"><img src="../../static/img/gys.png" style="width:30px;height:30px; cursor:pointer; margin-top: 28px;margin-right: 25px;"></span>
       </div>
     </el-header>
     <el-header v-if="!isHome" height="86px" style="text-align:center;">
-      <div  style="display:flex; justify-content:center; position:absolute; left:0; top:0; height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
-          <img src="../../static/img/menu.png" style="width:22px;height:20px; position:absolute; left:160px; top:2px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
-          <div style="margin-top:5px;"><img  src="../../static/img/avatar.png"> </div>
-          <div style="display:flex;flex-direction:column;margin-left: 10px;">
-              <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
-            </div>
-          <el-tabs v-model="activeTab" type="card" closable @tab-remove="removeTab" style="position:absolute; left:182px; top:0;">
+      <div class="menu-toggle" :style = "iscloseNav ? 'width:60px' : 'width:182px'">
+          <img src="../../static/img/menu.png" :style = "iscloseNav ? 'width:33px; cursor:pointer;' : 'width:22px;height:20px; position:absolute; left:160px; top:2px; cursor:pointer;'" title="菜单开关"  @click="toggleNav">
+          <div v-if="!iscloseNav" style="margin-top:5px;"><img  src="../../static/img/avatar.png"> </div>
+          <div v-if="!iscloseNav" style="display:flex;flex-direction:column;margin-left: 10px;">
+            <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
+          </div>
+          <el-tabs v-model="activeTab" type="card" closable @tab-remove="removeTab" :style = "iscloseNav ? 'position:absolute; left:60px; top:0;' : 'position:absolute; left:182px; top:0;'">
               <el-tab-pane
                   v-for="(item) in editableTabs"
                       :key="item.name"
@@ -27,10 +27,9 @@
               </el-tab-pane>
           </el-tabs>
       </div>
-      <!--div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
+      <div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
           <img  style="width: 50%; min-width: 30px; cursor:pointer;" src="../../static/img/menu.png" title="显示菜单面板" @click="expandNav">
-        </div-->
-      <div class="clear"></div>
+        </div>
     </el-header>
  
     <el-container  :class="bg_class">
@@ -54,7 +53,6 @@
             </span>
           </div> 
       </el-aside>
-  
 
         <el-main style="padding:0; width:100%;">
           <div v-if="!isHome" style="text-align:center; height:85px; background: #6c8eb5; color:#ffffff; width:100%;display:table;">
@@ -137,7 +135,7 @@
       },
       minimizeNav() {
         this.iscloseNav = true;
-        this.menvNavPanelWidth="0px"
+        this.menvNavPanelWidth="60px"
       },
       expandNav() {
         this.iscloseNav = false;
@@ -210,6 +208,21 @@
 
   .el-menu--popup {
     background-color: #16181d;
+  }
+
+  .menu-toggle {
+    display:flex; 
+    justify-content:center; 
+    position:absolute; 
+    left:0; 
+    top:0; 
+    height: 83px;
+    color:#ffffff; 
+    font-size:45px; 
+    background-color: #205796; 
+    text-align: center; 
+    align-items: center;
+    border-bottom: 2px solid #091c30;
   }
 
   .menu-button {
