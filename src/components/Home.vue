@@ -1,39 +1,37 @@
 <template>
-  <div style="height:100%;">
-    <div>
-      <el-header v-if="isHome" height="86px" style="text-align:center;background:#6c8eb5;">
-        <div style="text-align:center; 100%; width:100%;display:table;">
-            <span style="font-size:36px;color:#ffffff;vertical-align:middle;display: table-cell;">首页</span>
-        </div>
-        <div  style="display:table; justify-content:center; position:absolute; left:0; top:0; height: 86px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
-            <span style="vertical-align:middle;display: table-cell;"> <img src="../../static/img/menu.png" style="width:45px;height:45px; cursor:pointer;" title="菜单开关"  @click="toggleNav"></span>
-        </div>
-        <div style="position:absolute; right:0;top:0;display:table; ">
-            <span style="vertical-align:middle;display: table-cell;"><img src="../../static/img/gys.png" style="width:30px;height:30px; cursor:pointer; margin-top: 28px;margin-right: 25px;"></span>
-        </div>
-      </el-header>
-      <el-header v-if="!isHome" height="86px" style="text-align:center;">
-        <div  style="display:flex; justify-content:center; position:absolute; left:0; top:0; height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
-            <img src="../../static/img/menu.png" style="width:22px;height:20px; position:absolute; left:160px; top:2px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
-            <div style="margin-top:5px;"><img  src="../../static/img/avatar.png"> </div>
-            <div style="display:flex;flex-direction:column;margin-left: 10px;">
-                <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
-             </div>
-            <el-tabs v-model="activeTab" type="card" closable @tab-remove="removeTab" style="position:absolute; left:182px; top:0;">
-                <el-tab-pane
-                    v-for="(item) in editableTabs"
-                        :key="item.name"
-                        :label="item.title"
-                        :name="item.name">
-                </el-tab-pane>
-            </el-tabs>
-        </div>
-        <!--div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
-           <img  style="width: 50%; min-width: 30px; cursor:pointer;" src="../../static/img/menu.png" title="显示菜单面板" @click="expandNav">
-          </div-->
-        <div class="clear"></div>
-      </el-header>
-    </div>
+  <el-container>
+    <el-header v-if="isHome" height="86px" style="text-align:center;background:#6c8eb5;">
+      <div style="text-align:center; 100%; width:100%;display:table;">
+          <span style="font-size:36px;color:#ffffff;vertical-align:middle;display: table-cell;">首页</span>
+      </div>
+      <div  style="display:table; justify-content:center; position:absolute; left:0; top:0; height: 86px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
+          <span style="vertical-align:middle;display: table-cell;"> <img src="../../static/img/menu.png" style="width: 50%; min-width: 30px; cursor:pointer;" title="菜单开关"  @click="toggleNav"></span>
+      </div>
+      <div style="position:absolute; right:0;top:0;display:table; ">
+          <span style="vertical-align:middle;display: table-cell;"><img src="../../static/img/gys.png" style="width:30px;height:30px; cursor:pointer; margin-top: 28px;margin-right: 25px;"></span>
+      </div>
+    </el-header>
+    <el-header v-if="!isHome" height="86px" style="text-align:center;">
+      <div  style="display:flex; justify-content:center; position:absolute; left:0; top:0; height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:182px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
+          <img src="../../static/img/menu.png" style="width:22px;height:20px; position:absolute; left:160px; top:2px; cursor:pointer;" title="菜单开关"  @click="toggleNav">
+          <div style="margin-top:5px;"><img  src="../../static/img/avatar.png"> </div>
+          <div style="display:flex;flex-direction:column;margin-left: 10px;">
+              <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
+            </div>
+          <el-tabs v-model="activeTab" type="card" closable @tab-remove="removeTab" style="position:absolute; left:182px; top:0;">
+              <el-tab-pane
+                  v-for="(item) in editableTabs"
+                      :key="item.name"
+                      :label="item.title"
+                      :name="item.name">
+              </el-tab-pane>
+          </el-tabs>
+      </div>
+      <!--div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
+          <img  style="width: 50%; min-width: 30px; cursor:pointer;" src="../../static/img/menu.png" title="显示菜单面板" @click="expandNav">
+        </div-->
+      <div class="clear"></div>
+    </el-header>
  
     <el-container  :class="bg_class">
       <el-aside ref="menu_nav_panel" :width="menvNavPanelWidth" style="background-color: #205796;">
@@ -57,19 +55,17 @@
           </div> 
       </el-aside>
   
-      <el-container style="overflow-y: auto;">
-        <div style="width:100%;">
+
+        <el-main style="padding:0; width:100%;">
           <div v-if="!isHome" style="text-align:center; height:85px; background: #6c8eb5; color:#ffffff; width:100%;display:table;">
             <span style="font-size:36px;vertical-align:middle;display: table-cell;">{{headerText}}</span>
           </div>
-          <el-main style="padding:0;">
-            <!--router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab"></router-view-->
-            <div class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab" :is="activeTab" />
-          </el-main>
-        </div>
-      </el-container>
+          
+          <!--router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab"></router-view-->
+          <div class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab" :is="activeTab" />
+        </el-main>
     </el-container>
-  </div>
+  </el-container>
 </template>
 
 <script>
@@ -100,7 +96,8 @@
         organizedetail
     },
     mounted() {
-      this.zoom(document.body.clientWidth);
+      let lastZoom = 1;
+      // this.zoom(document.body.clientWidth);
       window.onresize = () => {
         if(!this.isResizing) {
           // this.zoom(document.body.clientWidth);
@@ -108,7 +105,7 @@
       };
     },
     methods: {
-      zoom(w) {
+      zoom(w, r) {
         if(w <= 1000) {
           return;
         } else {
@@ -194,6 +191,7 @@
   .bg_home  .content_size {
     /*margin:auto;*/
     height: 100%;
+    width: 100%;
     min-width: 1560px;
   }
 

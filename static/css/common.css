@@ -220,10 +220,6 @@ body {
   height: calc(100% - 86px) !important;
 }
 
-.el-main {
-  display: flex !important;
-}
-
 .el-row {
   margin-bottom: 20px;
 }
