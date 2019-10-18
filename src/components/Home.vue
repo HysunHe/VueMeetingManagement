@@ -224,7 +224,6 @@
     /*margin:auto;*/
     height: 100%;
     width: 100%;
-    width: 1560px;
   }
 
   .bg_content  .content_size {

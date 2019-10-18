@@ -336,7 +336,6 @@
         .homepanel {  
             margin-left:26px; 
             margin-top:26px;
-            width: 1560px;
         }
 </style>
 

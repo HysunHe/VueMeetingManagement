@@ -1,5 +1,5 @@
 <template>
-	<div> 
+	<div > 
 		<div class="top-msg-region">
 			<el-row  style=" font-size:1.25rem;">
 				<el-col :span="12" style="margin:0; padding:0;">
@@ -213,7 +213,7 @@
 		}
 		.table-card {
             width:723px;
-            height:476px;
+            height:416px;
             border: 1px solid;
             border-color: #4f718a;
             overflow-y: auto;
