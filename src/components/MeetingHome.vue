@@ -210,12 +210,10 @@
 		.box-card {
 			width:438px;
 			height:314px;
-            display: inline-table;
 		}
 		.table-card {
             width:723px;
             height:476px;
-            display: inline-table;
             border: 1px solid;
             border-color: #4f718a;
             overflow-y: auto;

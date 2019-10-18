@@ -1,5 +1,5 @@
 <template>
-	<div id="homepage" style="width:1588px;">
+	<div id="homepage" style="width:1585px;">
         <div style="width:100%"  class="card-button-section">
             <div class="card-button" v-for="(item,i) in shortlist" :key="item.name">
                 <span style="cursor:pointer;" @click="go(item)">
@@ -7,7 +7,7 @@
                     <span style="display:block; ">{{item.name}}</span>
                 </span>
             </div>
-            <div class="card-button" style="flex-grow:2px;">
+            <div class="card-button" style="flex-grow:1;">
                 <span style="cursor:pointer;" @click="add">
                     <img  style="padding-top:25px;" src="../../static/img/tj.png">
                     <span style="display:block; ">添加快捷键</span>
@@ -16,7 +16,7 @@
         </div>
 
         <div class="homepanel">
-            <el-card class="tablefull-card2">
+            <el-card class="tablefull-card">
                 <div slot="header" class="clearfix">
                     <span style="font-size:1.25rem; color:#333333; font-weight:600;">采购申请状态跟踪卡</span>
                 </div>
@@ -44,7 +44,7 @@
                         <el-table-column
                             prop="state"
                             label="状态跟踪"
-                            width="700">
+                            width="710">
                             <template slot-scope="scope">
                                 <div style="display:flex;flex-direction: row;align-items:center; ">
                                     <span :class="scope.row.state===0 ? 'statetext-now' : scope.row.state>0 ? 'statetext-passed' : 'statetext'">指标公告</span>
@@ -130,22 +130,22 @@
                         <el-table-column
                             prop="type"
                             label="内容类型"
-                            min-width="180">
+                            min-width="150">
                         </el-table-column>
                         <el-table-column
                             prop="desc"
                             label="内容描述"
-                            min-width="180">
+                            min-width="210">
                         </el-table-column>
                         <el-table-column
                             prop="notify"
                             label="通知类型"
-                            min-width="180">
+                            min-width="150">
                         </el-table-column>
                     </el-table>
                 </div>
             </el-card>
-            <el-card class="table-card" >
+            <el-card class="table-card" style="flex-grow:1;" >
                 <div slot="header" class="clearfix">
                     <span style="font-size:1.25rem; color:#333333; font-weight:600;">上会申请</span>
                     <el-button type="text" class="button"> 更多 <img style="width:18px; height:15px;" src="../../static/img/sjt.png"></el-button>
@@ -159,22 +159,22 @@
                         <el-table-column
                             prop="type"
                             label="内容类型"
-                            min-width="180">
+                            min-width="150">
                         </el-table-column>
                         <el-table-column
                             prop="desc"
                             label="内容描述"
-                            min-width="180">
+                            min-width="210">
                         </el-table-column>
                         <el-table-column
                             prop="applyDate"
                             label="申请日期"
-                            min-width="90">
+                            min-width="120">
                         </el-table-column>
                         <el-table-column
                             prop="applier"
                             label="申请人"
-                            min-width="130">
+                            min-width="90">
                         </el-table-column>
                     </el-table>
                 </div>
@@ -246,24 +246,15 @@
 <style scoped> 
 		.table-card {
             width:calc(50% - 26px);
-            display: inline-table;
             border: 1px solid;
             border-color: #4f718a;
-            overflow: scroll;
+            overflow: auto;
         }
-		.tablefull-card2 {
-            width:calc(100% - 29px);
-            display: inline-table;
-            border: 1px solid;
-            border-color: #4f718a;
-            overflow: scroll;
-		}
 		.tablefull-card {
-            width:calc(100% - 27px);
-            display: inline-table;
+            width:100%;
             border: 1px solid;
             border-color: #4f718a;
-            overflow: scroll;
+            overflow: auto;
 		}
 		.el-row {
 			margin-bottom: 30px;

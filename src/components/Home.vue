@@ -98,64 +98,53 @@
         organizedetail
     },
     mounted() {
-      // (function(doc, win){
-      //   let docE1 = doc.documentElement,
-      //   resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-      //   recalc = function(){
-      //     let clientWidth = docE1.clientWidth;
-      //     if(!clientWidth) return;
-      //     docE1.style.fontSize = 15 * (clientWidth / window.screen.width) + 'px';
-      //   };
-      //   if (!doc.addEventListener) return;
-      //   win.addEventListener(resizeEvt,recalc,false);
-      //   doc.addEventListener('DOMContentLoaded',recalc,false);
-      // })(document, window);
-
       let _this = this;
-      const cw = 1588;
+      const cw = 1585;
       let winSize = document.body.clientWidth;
-      if(winSize * (1 - _this.zoom.r)  < cw) {
-          _this.minimizeNav();
-      } else {
-          _this.expandNav();
+      let diff = 90;
+      if(winSize > 1000) {
+        diff = winSize > (cw + 240) ? 110 + (winSize - 1000) / cw * 168 : 168;
       }
-      // let diff = 90;
-      // if(winSize > 1000) {
-      //   diff = winSize > (cw + 240) ? 110 + (winSize - 1000) / cw * 168 : 168;
-      // }
-      // let z = (winSize - diff)/cw;
-      // _this.zoom.r = 1 - z;
-      // document.getElementsByTagName('body')[0].style.zoom=z;
-      // _this.zoom.lw = document.body.clientWidth;
-      // window.onresize = () => {
-      //   if(!_this.zoom.isResizing) {
-      //     _this.zoom.isResizing = true;
-      //     setTimeout(() => {
-      //       winSize = document.body.clientWidth;
-      //       diff = 90
-      //       if(winSize > 1000) {
-      //         diff = winSize > _this.zoom.lw ? 100 + (winSize - 1000) / cw * 168 : 168 * (_this.zoom.lw/winSize);  
-      //       }
-      //       if(winSize * (1 - _this.zoom.r) <= cw) {
-      //         if(winSize * (1 - _this.zoom.r) > 1000) {
-      //           diff -= 128;
-      //         } else {
-      //           diff -= 150;
-      //         }
-      //       }
-      //       if(winSize * (1 - _this.zoom.r)  < cw) {
-      //         _this.minimizeNav();
-      //       } else {
-      //         _this.expandNav();
-      //       }
-      //       z = (winSize * (1 - _this.zoom.r) - diff)/cw;
-      //       _this.zoom.r = 1 - z;
-      //       document.getElementsByTagName('body')[0].style.zoom=z
-      //       _this.zoom.lw = document.body.clientWidth;
-      //       _this.zoom.isResizing = false;
-      //     }, 300);
-        // }
-      // };
+      let z = (winSize - diff)/cw;
+      if(z > 1) z=1;
+      _this.zoom.r = 1 - z;
+      if(winSize  < cw) {
+          _this.minimizeNav();
+          if(z > 0.8) z=0.8;
+      } 
+      _this.zoom.r = 1 - z;
+      document.getElementsByTagName('body')[0].style.zoom=z;
+      _this.zoom.lw = document.body.clientWidth;
+      window.onresize = () => {
+        if(!_this.zoom.isResizing) {
+          _this.zoom.isResizing = true;
+          setTimeout(() => {
+            winSize = document.body.clientWidth;
+            diff = 90
+            if(winSize > 1000) {
+              diff = winSize > _this.zoom.lw ? 100 + (winSize - 1000) / cw * 168 : 168 * (_this.zoom.lw/winSize);  
+            }
+            if(winSize * (1 - _this.zoom.r) <= cw) {
+              if(winSize * (1 - _this.zoom.r) > 1000) {
+                diff -= 128;
+              } else {
+                diff -= 150;
+              }
+            }
+            if(winSize * (1 - _this.zoom.r)  < cw) {
+              _this.minimizeNav();
+            } else {
+              _this.expandNav();
+            }
+            z = (winSize * (1 - _this.zoom.r) - diff)/cw;
+            if(z > 1) z=1;
+            _this.zoom.r = 1 - z;
+            document.getElementsByTagName('body')[0].style.zoom=z
+            _this.zoom.lw = document.body.clientWidth;
+            _this.zoom.isResizing = false;
+          }, 300);
+        }
+      };
     },
     methods: {
       set_bg_class(className) {
