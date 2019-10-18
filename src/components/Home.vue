@@ -2,7 +2,7 @@
   <el-container>
     <el-header v-if="isHome" height="86px" style="text-align:center;background:#6c8eb5;">
       <div style="text-align:center; 100%; width:100%;display:table;">
-          <span style="font-size:36px;color:#ffffff;vertical-align:middle;display: table-cell;">首页</span>
+          <span style="font-size:2.25rem;color:#ffffff;vertical-align:middle;display: table-cell;">首页</span>
       </div>
       <div  class="menu-toggle" :style = "iscloseNav ? 'width:60px' : 'width:182px'">
           <span style="vertical-align:middle;display: table-cell;"> <img src="../../static/img/menu.png" :style = "iscloseNav ? 'width:33px; cursor:pointer;' : 'width:45px; cursor:pointer;'" title="菜单开关"  @click="toggleNav"></span>
@@ -16,7 +16,7 @@
           <img src="../../static/img/menu.png" :style = "iscloseNav ? 'width:33px; cursor:pointer;' : 'width:22px;height:20px; position:absolute; left:160px; top:2px; cursor:pointer;'" title="菜单开关"  @click="toggleNav">
           <div v-if="!iscloseNav" style="margin-top:5px;"><img  src="../../static/img/avatar.png"> </div>
           <div v-if="!iscloseNav" style="display:flex;flex-direction:column;margin-left: 10px;">
-            <span style="font-size:14px;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:22px;">战飞</span>
+            <span style="font-size:0.875rem;height:26px;margin-top: -16px;">欢迎您</span><span style="font-size:1.375rem;">战飞</span>
           </div>
           <el-tabs v-model="activeTab" type="card" closable @tab-remove="removeTab" :style = "iscloseNav ? 'position:absolute; left:60px; top:0;' : 'position:absolute; left:182px; top:0;'">
               <el-tab-pane
@@ -27,7 +27,7 @@
               </el-tab-pane>
           </el-tabs>
       </div>
-      <div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:45px; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
+      <div v-if="iscloseNav" style="float: left;height: 83px;color:#ffffff; font-size:2.8rem; background-color: #205796; width:60px; margin-left:-20px; text-align: center; align:center;border-bottom: 2px solid #091c30;">
           <img  style="width: 50%; min-width: 30px; cursor:pointer;" src="../../static/img/menu.png" title="显示菜单面板" @click="expandNav">
         </div>
     </el-header>
@@ -37,26 +37,26 @@
           <div :class="iscloseNav ? 'menu-button-small' : 'menu-button'">
             <span style="cursor:pointer;">
               <img :style="iscloseNav? 'padding-top:15px; width: 50%; min-width: 30px;' : 'padding-top:22px;'" src="../../static/img/tasks.png">
-              <span v-if="!iscloseNav" style="display:block; font-size:18px; font-weight:bold;">我的任务</span>
+              <span v-if="!iscloseNav" style="display:block; font-size:1.125rem; font-weight:bold;">我的任务</span>
             </span>
           </div>
           <div :class="iscloseNav ? 'menu-button-small' : 'menu-button'">
             <span style="cursor:pointer;">
               <img  :style="iscloseNav? 'padding-top:15px; width: 50%; min-width: 30px;' : 'padding-top:22px;'" src="../../static/img/sm.png">
-              <span v-if="!iscloseNav" style="display:block; font-size:18px; font-weight:bold;">供应商管理</span>
+              <span v-if="!iscloseNav" style="display:block; font-size:1.125rem; font-weight:bold;">供应商管理</span>
             </span>
           </div> 
           <div :class="iscloseNav ? 'menu-button-small' : 'menu-button'">
             <span style="cursor:pointer;">
               <img  :style="iscloseNav? 'padding-top:20px; width: 50%; min-width: 30px;' : 'padding-top:22px;'" src="../../static/img/setup.png">
-              <span v-if="!iscloseNav" style="display:block; font-size:18px; font-weight:bold;">我的设置</span>
+              <span v-if="!iscloseNav" style="display:block; font-size:1.125rem; font-weight:bold;">我的设置</span>
             </span>
           </div> 
       </el-aside>
 
         <el-main style="padding:0; width:100%;">
           <div v-if="!isHome" style="text-align:center; height:85px; background: #6c8eb5; color:#ffffff; width:100%;display:table;">
-            <span style="font-size:36px;vertical-align:middle;display: table-cell;">{{headerText}}</span>
+            <span style="font-size:2.25rem;vertical-align:middle;display: table-cell;">{{headerText}}</span>
           </div>
           
           <!--router-view class="content_size" @set_bg_class="set_bg_class" @set_header_text="set_header" @set_tab="set_tab"></router-view-->
@@ -98,46 +98,64 @@
         organizedetail
     },
     mounted() {
+      // (function(doc, win){
+      //   let docE1 = doc.documentElement,
+      //   resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      //   recalc = function(){
+      //     let clientWidth = docE1.clientWidth;
+      //     if(!clientWidth) return;
+      //     docE1.style.fontSize = 15 * (clientWidth / window.screen.width) + 'px';
+      //   };
+      //   if (!doc.addEventListener) return;
+      //   win.addEventListener(resizeEvt,recalc,false);
+      //   doc.addEventListener('DOMContentLoaded',recalc,false);
+      // })(document, window);
+
       let _this = this;
       const cw = 1588;
       let winSize = document.body.clientWidth;
-      let diff = 90;
-      if(winSize > 1000) {
-        diff = winSize > (cw + 240) ? 110 + (winSize - 1000) / cw * 168 : 168;
+      if(winSize * (1 - _this.zoom.r)  < cw) {
+          _this.minimizeNav();
+      } else {
+          _this.expandNav();
       }
-      let z = (winSize - diff)/cw;
-      _this.zoom.r = 1 - z;
-      document.getElementsByTagName('body')[0].style.zoom=z;
-      _this.zoom.lw = document.body.clientWidth;
-      window.onresize = () => {
-        if(!_this.zoom.isResizing) {
-          _this.zoom.isResizing = true;
-          setTimeout(() => {
-            winSize = document.body.clientWidth;
-            diff = 90
-            if(winSize > 1000) {
-              diff = winSize > _this.zoom.lw ? 100 + (winSize - 1000) / cw * 168 : 168 * (_this.zoom.lw/winSize);  
-            }
-            if(winSize * (1 - _this.zoom.r) <= cw) {
-              if(winSize * (1 - _this.zoom.r) > 1000) {
-                diff -= 128;
-              } else {
-                diff -= 150;
-              }
-            }
-            if(winSize * (1 - _this.zoom.r)  < cw) {
-              _this.minimizeNav();
-            } else {
-              _this.expandNav();
-            }
-            z = (winSize * (1 - _this.zoom.r) - diff)/cw;
-            _this.zoom.r = 1 - z;
-            document.getElementsByTagName('body')[0].style.zoom=z
-            _this.zoom.lw = document.body.clientWidth;
-            _this.zoom.isResizing = false;
-          }, 300);
-        }
-      };
+      // let diff = 90;
+      // if(winSize > 1000) {
+      //   diff = winSize > (cw + 240) ? 110 + (winSize - 1000) / cw * 168 : 168;
+      // }
+      // let z = (winSize - diff)/cw;
+      // _this.zoom.r = 1 - z;
+      // document.getElementsByTagName('body')[0].style.zoom=z;
+      // _this.zoom.lw = document.body.clientWidth;
+      // window.onresize = () => {
+      //   if(!_this.zoom.isResizing) {
+      //     _this.zoom.isResizing = true;
+      //     setTimeout(() => {
+      //       winSize = document.body.clientWidth;
+      //       diff = 90
+      //       if(winSize > 1000) {
+      //         diff = winSize > _this.zoom.lw ? 100 + (winSize - 1000) / cw * 168 : 168 * (_this.zoom.lw/winSize);  
+      //       }
+      //       if(winSize * (1 - _this.zoom.r) <= cw) {
+      //         if(winSize * (1 - _this.zoom.r) > 1000) {
+      //           diff -= 128;
+      //         } else {
+      //           diff -= 150;
+      //         }
+      //       }
+      //       if(winSize * (1 - _this.zoom.r)  < cw) {
+      //         _this.minimizeNav();
+      //       } else {
+      //         _this.expandNav();
+      //       }
+      //       z = (winSize * (1 - _this.zoom.r) - diff)/cw;
+      //       _this.zoom.r = 1 - z;
+      //       document.getElementsByTagName('body')[0].style.zoom=z
+      //       _this.zoom.lw = document.body.clientWidth;
+      //       _this.zoom.isResizing = false;
+      //     }, 300);
+        // }
+      // };
     },
     methods: {
       set_bg_class(className) {
@@ -245,7 +263,7 @@
     top:0; 
     height: 83px;
     color:#ffffff; 
-    font-size:45px; 
+    font-size:2.8rem; 
     background-color: #205796; 
     text-align: center; 
     align-items: center;

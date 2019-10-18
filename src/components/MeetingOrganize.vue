@@ -112,7 +112,7 @@
                 :data="meetingTopics"
                 stripe
                 :header-cell-style="headerCcell"
-                style="width: 100%; font-size:18px; color:#333333;">
+                style="width: 100%; font-size:1.125rem; color:#333333;">
                 <el-table-column
                     type="index"
                     label="序号"
@@ -330,7 +330,7 @@
 </script>
 <style scoped> 
     .top-msg-region {
-        font-size: 22px;
+        font-size:1.375rem;
         color:#ffffff;
         margin-top:38px;
     }
@@ -351,7 +351,7 @@
         background: #ffffff;
         width:130px;
         height:62px;
-        font-size:20px;
+        font-size:1.25rem;
         color: #0c7df0;
     }
 </style>

@@ -1,12 +1,12 @@
 <template>
 	<div> 
 		<div class="top-msg-region">
-			<el-row  style="font-size:20px;">
+			<el-row  style=" font-size:1.25rem;">
 				<el-col :span="12" style="margin:0; padding:0;">
 					<span style="padding-left:52px; display: inline-block; margin-top: 45px;">最近会议时间：</span><span>2019/09/24 16:08:23 </span>
 				</el-col>
 				<el-col :span="12" style="margin:0; padding:0;">
-					<span style="display: inline-block; margin-top: 45px;">未加入会议议题：</span><span style="font-size:34px; color:#ffed27;">年末销售提升方案</span>
+					<span style="display: inline-block; margin-top: 45px;">未加入会议议题：</span><span style=" font-size:2.125rem; color:#ffed27;">年末销售提升方案</span>
 				</el-col>				
 			</el-row>
 		</div>
@@ -42,14 +42,14 @@
             <div id="tablesection" class="tablesection" style="display:flex; flex-wrap: nowrap;">
                 <el-card class="table-card" style="margin-right:22px;">
                     <div slot="header" class="clearfix">
-                        <span style="font-size:24px; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">{{totalMeetings}}</span>会议申请等待安排）</span>
+                        <span style=" font-size:1.5rem; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">{{totalMeetings}}</span>会议申请等待安排）</span>
                     </div>
                     <div>
                         <el-table
                             :data="meetingList"
                             stripe
                             :header-cell-style="headerCcell"
-                            style="width: 100%; font-size:18px; color:#333333;">
+                            style="width: 100%; font-size:1.125rem; color:#333333;">
                             <el-table-column
                                 prop="meetingName"
                                 label="方案名称"
@@ -74,14 +74,14 @@
                 </el-card>
                 <el-card class="table-card" style="margin-left:22px;">
                     <div slot="header" class="clearfix">
-                        <span style="font-size:24px; color:#333333; font-weight:600;">会议安排（当前有<span style="color:#ff200f;">{{totalTopics}}</span>会议申请等待安排）</span>
+                        <span style=" font-size:1.5rem; color:#333333; font-weight:600;">会议安排（当前有<span style="color:#ff200f;">{{totalTopics}}</span>会议申请等待安排）</span>
                     </div>
                     <div>
                         <el-table
                             :data="topicList"
                             stripe
                             :header-cell-style="headerCcell"
-                            style="width: 100%; font-size:18px; color:#333333;">
+                            style="width: 100%; font-size:1.125rem; color:#333333;">
                             <el-table-column
                                 prop="topicName"
                                 label="会议议题"
@@ -240,7 +240,7 @@
 		}
         .menu-button {
             color:#333333;
-            font-size:34px;
+             font-size:2.125rem;
             text-align: center;
             margin:0;
             width:100%;
@@ -255,7 +255,7 @@
             background: #2595cf;
             width:144px;
             height:52px;
-            font-size:18px;
+            font-size:1.125rem;
             color: #ffffff;
         }
         .clearfix:before,
