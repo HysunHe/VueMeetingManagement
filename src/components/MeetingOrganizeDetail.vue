@@ -13,7 +13,7 @@
             <el-button   type="text" style="margin-left:-4px;" class="button button-inactive">会议材料</el-button>
         </div>
 
-        <div  style="display:flex; flex-wrap:nowrap; margin-top:30px;">
+        <div  style="display:flex; flex-wrap:wrap; margin-top:30px;">
             <el-card class="box-card">
                 <div>
                     <span style="display:block; font-size:24px; color:#80c2fc;">项目背景</span>

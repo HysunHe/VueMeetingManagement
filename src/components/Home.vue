@@ -85,7 +85,9 @@
         editableTabs: [],
         isHome: true,
         zoom: {
-          r: 0,
+          cw: 1585,
+          dw: window.screen.availWidth,
+          r: 1,
           lw: 0,
           isResizing: false
         }
@@ -99,64 +101,18 @@
     },
     mounted() {
       let _this = this;
-      const cw = 1585;
-      let winSize = document.body.clientWidth;
-      if(winSize  < cw) {
-        _this.minimizeNav();
-      } else {
-        _this.expandNav();
-      }
-      let diff = 90;
-      if(winSize > 1000) {
-        diff = winSize > (cw + 240) ? 110 + (winSize - 1000) / cw * 168 : 168;
-      }
-      if(winSize * (1 - _this.zoom.r) <= cw) {
-        if(winSize * (1 - _this.zoom.r) > 1000) {
-          diff -= 128;
-        } else {
-          diff -= 150;
+      _this.orient();
+      _this.zoomd();
+      window.onresize = () => {
+        _this.orient();
+        if(!_this.zoom.isResizing) {
+          _this.zoom.isResizing = true;
+          setTimeout(() => {
+            _this.zoomd();
+            _this.zoom.isResizing = false;
+          }, 300);
         }
-      }
-      let z = (winSize - diff)/cw;
-      if(z > 1) z=1;
-      _this.zoom.r = 1 - z;
-      if(winSize  < cw) {
-          _this.minimizeNav();
-          if(z > 0.8) z=0.8;
-      } 
-      _this.zoom.r = 1 - z;
-      document.getElementsByTagName('body')[0].style.zoom=z;
-      _this.zoom.lw = document.body.clientWidth;
-      // window.onresize = () => {
-      //   if(!_this.zoom.isResizing) {
-      //     _this.zoom.isResizing = true;
-      //     setTimeout(() => {
-      //       winSize = document.body.clientWidth;
-      //       diff = 90
-      //       if(winSize > 1000) {
-      //         diff = winSize > _this.zoom.lw ? 100 + (winSize - 1000) / cw * 168 : 168 * (_this.zoom.lw/winSize);  
-      //       }
-      //       if(winSize * (1 - _this.zoom.r) <= cw) {
-      //         if(winSize * (1 - _this.zoom.r) > 1000) {
-      //           diff -= 128;
-      //         } else {
-      //           diff -= 150;
-      //         }
-      //       }
-      //       if(winSize * (1 - _this.zoom.r)  < cw) {
-      //         _this.minimizeNav();
-      //       } else {
-      //         _this.expandNav();
-      //       }
-      //       z = (winSize * (1 - _this.zoom.r) - diff)/cw;
-      //       if(z > 1) z=1;
-      //       _this.zoom.r = 1 - z;
-      //       document.getElementsByTagName('body')[0].style.zoom=z
-      //       _this.zoom.lw = document.body.clientWidth;
-      //       _this.zoom.isResizing = false;
-      //     }, 300);
-        // }
-      // };
+      };
     },
     methods: {
       set_bg_class(className) {
@@ -171,7 +127,6 @@
       set_tab(tab) {
         let existedTab = [...this.editableTabs].filter(e => e.name === tab.name);
         if(!existedTab || existedTab.length === 0) {
-          // console.log("* Adding the tab " + tab);
           this.editableTabs.push({
             title: tab.title,
             name: tab.name
@@ -193,6 +148,41 @@
         } else {
           this.minimizeNav();
         }
+      },
+      orient() {
+          let width = document.documentElement.clientWidth,
+                height = document.documentElement.clientHeight,
+                wrapper = document.getElementById("app"),
+                style = "";
+        if(width >= height) { 
+            style += "width:100%"; 
+            style += "height:100%;";
+            style += "-webkit-transform: rotate(0); transform: rotate(0);";
+            style += "-webkit-transform-origin: 0 0;";
+            style += "transform-origin: 0 0;";
+        } else { 
+            style += "width:" + height + "px;";
+            style += "height:" + width + "px;";
+            style += "-webkit-transform: rotate(90deg); transform: rotate(90deg);";
+            style += "-webkit-transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+            style += "transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+        }
+        wrapper.style.cssText = style;
+      },
+      zoomd() {
+        let nw = this.zoom.dw * (1/this.zoom.r);
+        if(nw < this.zoom.cw) {
+          this.minimizeNav();
+        } 
+        let z = (nw-this.zoom.dw/18)/this.zoom.cw;
+        if(z > 1) {
+          z=1;
+        } else if(z < 0.3) {
+          z=0.3;
+        }
+        this.zoom.r = z;
+        document.getElementsByTagName('body')[0].style.zoom=z;
+        this.zoom.lw = document.body.clientWidth;
       },
       removeTab(targetName) {
         let tabs = this.editableTabs;
