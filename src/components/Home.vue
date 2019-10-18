@@ -86,7 +86,7 @@
         isHome: true,
         zoom: {
           cw: 1585,
-          dw: Math.max(window.screen.availWidth, window.screen.availHeight)
+          v: -1
         }
       };
     },
@@ -98,10 +98,12 @@
     },
     mounted() {
       let _this = this;
-      _this.orient();
+      // _this.orient();
       _this.zoomd();
       window.onresize = () => {
-        _this.orient();
+        setTimeout(() => {
+          _this.zoomd();
+        }, 200);
       };
     },
     methods: {
@@ -160,16 +162,31 @@
         wrapper.style.cssText = style;
       },
       zoomd() {
-        if(this.zoom.dw < this.zoom.cw) {
+        if(window.screen.availWidth < this.zoom.cw) {
           this.minimizeNav();
         } 
-        let z = ( (this.zoom.dw - this.zoom.dw/18 )/this.zoom.cw).toFixed(2);
+        let width = document.documentElement.clientWidth,
+              height = document.documentElement.clientHeight;
+        let zw = window.screen.availWidth;
+        if(width > height) {
+          if(this.zoom.v === 0) {
+            return true;
+          } else {
+            this.zoom.v = 0;
+          }
+        } else {
+          if(this.zoom.v === 1) {
+            return true;
+          } else {
+            this.zoom.v = 1;
+          }
+        }
+        let z = ( (zw - zw/18 )/this.zoom.cw).toFixed(2);
         if(z > 1) {
           if(window.devicePixelRatio >=1) z=0.9;
         } else if(z < 0.3) {
           z=0.3;
         }
-        console.log("z: " + z);
         document.getElementsByTagName('body')[0].style.zoom=z;
       },
       removeTab(targetName) {
