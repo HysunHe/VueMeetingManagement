@@ -86,7 +86,8 @@
         isHome: true,
         zoom: {
           cw: 1585,
-          v: -1
+          v: -1,
+          sizing: false
         }
       };
     },
@@ -101,8 +102,11 @@
       // _this.orient();
       _this.zoomd();
       window.onresize = () => {
+        if(_this.zoom.sizing) return;
+        _this.zoom.sizing = true;
         setTimeout(() => {
           _this.zoomd();
+          _this.zoom.sizing = false;
         }, 200);
       };
     },
@@ -167,19 +171,20 @@
         } 
         let width = document.documentElement.clientWidth,
               height = document.documentElement.clientHeight;
-        let zw = window.screen.availWidth;
+        let zw = width;
+        let lastV = this.zoom.v;
         if(width > height) {
-          if(this.zoom.v === 0) {
+          if(lastV === 0) {
             return true;
-          } else {
-            this.zoom.v = 0;
-          }
+          } 
+          this.zoom.v = 0;
+          zw = Math.max(window.screen.availWidth, window.screen.availHeight);
         } else {
-          if(this.zoom.v === 1) {
+          if(lastV === 1) {
             return true;
-          } else {
-            this.zoom.v = 1;
-          }
+          } 
+          this.zoom.v = 1;
+          zw = Math.min(window.screen.availWidth, window.screen.availHeight);
         }
         let z = ( (zw - zw/18 )/this.zoom.cw).toFixed(2);
         if(z > 1) {
