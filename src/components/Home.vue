@@ -54,7 +54,7 @@
           </div> 
       </el-aside>
 
-        <el-main style="padding:0; width:100%;">
+        <el-main style="padding:0; width:100%;height:inherit;">
           <div v-if="!isHome" style="text-align:center; height:85px; background: #6c8eb5; color:#ffffff; width:100%;display:table;">
             <span style="font-size:2.25rem;vertical-align:middle;display: table-cell;">{{headerText}}</span>
           </div>
@@ -101,9 +101,21 @@
       let _this = this;
       const cw = 1585;
       let winSize = document.body.clientWidth;
+      if(winSize  < cw) {
+        _this.minimizeNav();
+      } else {
+        _this.expandNav();
+      }
       let diff = 90;
       if(winSize > 1000) {
         diff = winSize > (cw + 240) ? 110 + (winSize - 1000) / cw * 168 : 168;
+      }
+      if(winSize * (1 - _this.zoom.r) <= cw) {
+        if(winSize * (1 - _this.zoom.r) > 1000) {
+          diff -= 128;
+        } else {
+          diff -= 150;
+        }
       }
       let z = (winSize - diff)/cw;
       if(z > 1) z=1;
@@ -115,36 +127,36 @@
       _this.zoom.r = 1 - z;
       document.getElementsByTagName('body')[0].style.zoom=z;
       _this.zoom.lw = document.body.clientWidth;
-      window.onresize = () => {
-        if(!_this.zoom.isResizing) {
-          _this.zoom.isResizing = true;
-          setTimeout(() => {
-            winSize = document.body.clientWidth;
-            diff = 90
-            if(winSize > 1000) {
-              diff = winSize > _this.zoom.lw ? 100 + (winSize - 1000) / cw * 168 : 168 * (_this.zoom.lw/winSize);  
-            }
-            if(winSize * (1 - _this.zoom.r) <= cw) {
-              if(winSize * (1 - _this.zoom.r) > 1000) {
-                diff -= 128;
-              } else {
-                diff -= 150;
-              }
-            }
-            if(winSize * (1 - _this.zoom.r)  < cw) {
-              _this.minimizeNav();
-            } else {
-              _this.expandNav();
-            }
-            z = (winSize * (1 - _this.zoom.r) - diff)/cw;
-            if(z > 1) z=1;
-            _this.zoom.r = 1 - z;
-            document.getElementsByTagName('body')[0].style.zoom=z
-            _this.zoom.lw = document.body.clientWidth;
-            _this.zoom.isResizing = false;
-          }, 300);
-        }
-      };
+      // window.onresize = () => {
+      //   if(!_this.zoom.isResizing) {
+      //     _this.zoom.isResizing = true;
+      //     setTimeout(() => {
+      //       winSize = document.body.clientWidth;
+      //       diff = 90
+      //       if(winSize > 1000) {
+      //         diff = winSize > _this.zoom.lw ? 100 + (winSize - 1000) / cw * 168 : 168 * (_this.zoom.lw/winSize);  
+      //       }
+      //       if(winSize * (1 - _this.zoom.r) <= cw) {
+      //         if(winSize * (1 - _this.zoom.r) > 1000) {
+      //           diff -= 128;
+      //         } else {
+      //           diff -= 150;
+      //         }
+      //       }
+      //       if(winSize * (1 - _this.zoom.r)  < cw) {
+      //         _this.minimizeNav();
+      //       } else {
+      //         _this.expandNav();
+      //       }
+      //       z = (winSize * (1 - _this.zoom.r) - diff)/cw;
+      //       if(z > 1) z=1;
+      //       _this.zoom.r = 1 - z;
+      //       document.getElementsByTagName('body')[0].style.zoom=z
+      //       _this.zoom.lw = document.body.clientWidth;
+      //       _this.zoom.isResizing = false;
+      //     }, 300);
+        // }
+      // };
     },
     methods: {
       set_bg_class(className) {
@@ -222,14 +234,14 @@
 
   .bg_home  .content_size {
     /*margin:auto;*/
-    height: 100%;
+    height: auto;
     width: 100%;
   }
 
   .bg_content  .content_size {
     margin:auto;
     width: 100%;
-    height: 100%;
+    height: auto;
     margin-left:52px;
   }
 

@@ -39,7 +39,7 @@
                 </el-card>
             </div>
 
-            <div id="tablesection" class="tablesection" style="display:flex; flex-wrap: nowrap;">
+            <div id="tablesection" class="tablesection" style="display:flex; flex-wrap: nowrap; margin-bottom:40px;">
                 <el-card class="table-card" style="margin-right:22px;">
                     <div slot="header" class="clearfix">
                         <span style=" font-size:1.5rem; color:#333333; font-weight:600;">上会申请（当前有<span style="color:#ff200f;">{{totalMeetings}}</span>会议申请等待安排）</span>
@@ -209,7 +209,7 @@
 <style scoped> 
 		.box-card {
 			width:438px;
-			height:314px;
+			height:auto;
 		}
 		.table-card {
             width:723px;
@@ -240,9 +240,11 @@
             color:#333333;
              font-size:2.125rem;
             text-align: center;
+            justify-content: center;
+            align-items: center;
             margin:0;
             width:100%;
-            height:120px;
+            /*height:120px;*/
         }
         .bottom {
             margin-top: 20px;
@@ -271,14 +273,10 @@
 </style>
 
 <style>
-    #meetingHome {
-        /*height: calc(100vh - 286px);*/
-    }
     #meetingHome  .el-table__body-wrapper {
         overflow-y: auto !important;
-        /*height:calc(100vh - 828px);*/
         min-height: 220px;
-        max-height: 328px;
+        max-height: 268px;
     }
     #tablesection .el-card__body {
         padding-top:0 !important;

@@ -1,5 +1,5 @@
 <template>
-	<div id="homepage" style="width:1585px;">
+	<div id="homepage" style="width:100%; max-width:1585px;">
         <div style="width:100%"  class="card-button-section">
             <div class="card-button" v-for="(item,i) in shortlist" :key="item.name">
                 <span style="cursor:pointer;" @click="go(item)">
@@ -167,7 +167,7 @@
                             min-width="210">
                         </el-table-column>
                         <el-table-column
-                            prop="applyDate"
+                            prop="applydate"
                             label="申请日期"
                             min-width="120">
                         </el-table-column>
