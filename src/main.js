@@ -7,13 +7,15 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import App from './App'
 import router from './router'
-
 import axios from 'axios'
+import vConsole from 'vconsole';
+
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$http = axios;
 Vue.prototype.baseurl = 'https://o100.odainfra.com/faw_backend';
 Vue.prototype.datacache = {};
+window.vConsole = new vConsole();
 
 /* eslint-disable no-new */
 new Vue({
