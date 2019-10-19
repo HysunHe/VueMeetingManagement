@@ -166,7 +166,7 @@
         wrapper.style.cssText = style;
       },
       zoomd() {
-        if(window.screen.availWidth < this.zoom.cw) {
+        if((window.screen.availWidth - 182 - 40) * (1/0.85) < this.zoom.cw) {
           this.minimizeNav();
         } 
         let width = document.documentElement.clientWidth,
@@ -186,12 +186,17 @@
           this.zoom.v = 1;
           zw = Math.min(window.screen.availWidth, window.screen.availHeight);
         }
-        let z = ( (zw - zw/18 )/this.zoom.cw).toFixed(2);
+        let z = ( (zw - 40 )/this.zoom.cw).toFixed(2);
         if(z > 1) {
-          if(window.devicePixelRatio >=1) z=0.9;
-        } else if(z < 0.3) {
-          z=0.3;
-        }
+          z=1;
+        } else if (z < 0.4) {
+          z=0.4;
+        } 
+        if(window.devicePixelRatio >0.9 && z < 0.85 
+            && window.screen.availWidth - 40 < this.zoom.cw  && window.screen.availWidth > 1024) {
+          z=0.85;
+        } 
+        console.log(z);
         document.getElementsByTagName('body')[0].style.zoom=z;
       },
       removeTab(targetName) {
