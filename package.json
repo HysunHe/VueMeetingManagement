@@ -1,8 +1,8 @@
 {
-  "name": "element_back",
+  "name": "MeetingManagement",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "xue <15093568689@163.com>",
+  "description": "Meeting Management Project",
+  "author": "hysun.he@oracle.com",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -12,10 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.2.1",
-    "js-md5": "^0.7.3",
-    "vue": "^2.5.2",
-    "vue-amap": "^0.5.10",
-    "vue-router": "^3.1.3"
+    "vue": "^2.5.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
