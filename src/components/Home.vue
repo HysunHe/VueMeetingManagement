@@ -168,9 +168,10 @@
       zoomd() {
         const defz = 0.85;
         let diff = 182;
-        if( (window.screen.availWidth - 182 - 40) * (1/defz) < this.zoom.cw) {
+        console.log("Avail Width " + window.screen.availWidth );
+        if( (window.screen.availWidth - diff - 40) * (1/defz) < this.zoom.cw) {
           this.minimizeNav();
-          diff = 0;
+          diff -= 182;
         } 
         let width = document.documentElement.clientWidth,
               height = document.documentElement.clientHeight;
