@@ -167,11 +167,9 @@
       },
       zoomd() {
         const defz = 0.85;
-        let diff = 182;
         console.log("Avail Width " + window.screen.availWidth );
-        if( (window.screen.availWidth - diff - 40) * (1/defz) < this.zoom.cw) {
+        if( (window.screen.availWidth - 40) * (1/defz) < this.zoom.cw) {
           this.minimizeNav();
-          diff -= 182;
         } 
         let width = document.documentElement.clientWidth,
               height = document.documentElement.clientHeight;
@@ -190,7 +188,7 @@
           this.zoom.v = 1;
           zw = Math.min(window.screen.availWidth, window.screen.availHeight);
         }
-        let z = ( (zw - diff - 40 )/this.zoom.cw).toFixed(2);
+        let z = ( (zw - 40 )/this.zoom.cw).toFixed(2);
         if(window.devicePixelRatio >0.9 && z > defz 
           && window.screen.availWidth - 60 - 40 < this.zoom.cw  
           && window.screen.availWidth > 1024) {
