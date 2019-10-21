@@ -1,5 +1,5 @@
 <template>
-    <div style="margin-left:40px; margin-right:40px;">
+    <div style="margin-left:40px; margin-right:40px; min-width:1200px;">
         <!-- el-breadcrumb separator-class="el-icon-arrow-right" class="crumb">
             <el-breadcrumb-item :to="{ path: '/' }">会议中心</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/organize' }">会议组织</el-breadcrumb-item>
@@ -13,7 +13,7 @@
             <el-button   type="text" style="margin-left:-4px;" class="button button-inactive">会议材料</el-button>
         </div>
 
-        <div  style="display:flex; flex-wrap:wrap; margin-top:30px;">
+        <div  style="display:flex; flex-wrap:wrap; margin-top:10px;">
             <el-card class="box-card">
                 <div>
                     <span style="display:block; font-size:24px; color:#80c2fc;">项目背景</span>
@@ -25,7 +25,7 @@
                     <span style="display:block; margin-top: 10px; font-size:18px; color:#333333;">项目内容：自动驾使行人主动识别工程</span>
                 </div>
             </el-card>
-            <el-card class="box-card" style="margin-left:48px;">
+            <el-card class="box-card">
                 <div>
                     <span style="display:block; font-size:24px; color:#80c2fc;">采购方案</span>
                     <span style="display:block; margin-top: 15px; font-size:18px; color:#333333; font-weight:bold;">采购方式：直接采购</span>
@@ -153,9 +153,10 @@
         margin-top:38px;
     }
     .box-card {
+        margin-top:20px;
+        margin-right: 20px;
         width:602px;
-        height:288px;
-        display: inline-table;
+      /*  height:288px; */
     }
     .el-row {
         margin-bottom: 20px;
